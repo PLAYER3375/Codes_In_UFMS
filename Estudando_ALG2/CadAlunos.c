@@ -1,7 +1,7 @@
 /*
 NOME: Matheus Henrique dos Santos Gomes
 DATA: 21/08/2025
-ALGORITMIMOS E PROGRAMAÇÃO 2
+ALGORITMOS E PROGRAMAÇÃO 2
 PROJETO: SISTEMA DE CADASTRO DE ALUNOS
 */
 
@@ -96,7 +96,7 @@ void cadastro(reg_alunos aluno[], int i, int *n){
 int main(void){
     reg_alunos aluno[100];
     int n;
-    int i, qtd, num;
+    int i, j, qtd, num;
     char resp;
     n=0;
 
@@ -124,13 +124,32 @@ int main(void){
             break;
 
             case 4:
-                printf("Escolha entre as duas opções de ordenação\n");
-                printf("1:RGA\n");
-                printf("2:Nome\n");
-                scanf(" %d", &i);
-                if(i==1){
-                    ordenadoRGA(aluno, n);
-                }
+                printf("Escolha entre as três opções de ordenação\n");
+                do{
+                    aux=0;
+                    printf("1:RGA\n");
+                    printf("2:Nome\n");
+                    printf("3:MA\n");
+                    scanf(" %d", &i);
+                    switch (i){
+                        case 1:
+                            ordenadoRGA(aluno, n);
+                        break;
+
+                        case 2:
+                            ordenadoNome(aluno, n);
+                        break;
+
+                        case 3:
+                            ordenadoMA(aluno, n);
+                        break;
+                        
+                        default:
+                            aux=1;
+                            printf("Escolha SOMENTE entre as três opções:");
+                        break
+                    }
+                }while(aux==1);
                 printTodos(aluno, n);
                 
             break;
