@@ -144,7 +144,7 @@ void cadastro(reg_alunos aluno[], int i, int *n){
 int main(void){
     reg_alunos aluno[100];
     int n;
-    int i, j, qtd, num;
+    int i, j, qtd, num, aux;
     char resp;
     n=0;
 
@@ -193,16 +193,16 @@ int main(void){
                         default:
                             aux=1;
                             printf("Escolha SOMENTE entre as três opções:");
-                        break
+                        break;
                     }
                 }while(aux==1);
                 
                 do{
                     aux=0;
                     printf("Escolha a visualização:\n");
-                    printf("1:Visualizar todos os alunos");
-                    printf("2:Visualizar apenas os aprovados");
-                    printf("3:Visualizar apenas os reprovados");
+                    printf("1:Visualizar todos os alunos\n");
+                    printf("2:Visualizar apenas os aprovados\n");
+                    printf("3:Visualizar apenas os reprovados\n");
                     scanf(" %d", &i);
                     switch (i){
                         case 1:
@@ -220,7 +220,7 @@ int main(void){
                         default:
                             aux=1;
                             printf("Escolha SOMENTE entre as três opções:");
-                        break
+                        break;
                     }
                 }while(aux==1);
 
