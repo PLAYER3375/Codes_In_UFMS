@@ -42,16 +42,22 @@ void atribui(reg_alunos aluno[], int i){
         aluno[i].aprovado=1;
     }
     else{
-        aluno[i].aprovado=0;
+        aluno[i].aprovado=-1;
     }
 }
 
 /*Printa todos os alunos cadastrados na ordem que estão. Se ordenados por outra função, aparecerão naquela ordem*/
-void printTodos(reg_alunos aluno[], int n){
+void printTodos(reg_alunos aluno[], int n, int aprovacao){
     int i;
     printf("||RGA||Nome do aluno||Prova 1||Prova 2||Trabalho||MA||\n");
     for(i=0; i<n; i++){
-        printf("||%d||%s||%2.f||%2.f||%2.f||%2.f||\n", aluno[i].rga, aluno[i].nome, aluno[i].p1, aluno[i].p2, aluno[i].tb, aluno[i].media);
+        if(aprovacao==1 && aluno[i].aprovado==1){
+            printf("||%d||%s||%2.f||%2.f||%2.f||%2.f||\n", aluno[i].rga, aluno[i].nome, aluno[i].p1, aluno[i].p2, aluno[i].tb, aluno[i].media);
+        } else if(aprovacao==-1 && aluno[i].aprovado==-1){
+            printf("||%d||%s||%2.f||%2.f||%2.f||%2.f||\n", aluno[i].rga, aluno[i].nome, aluno[i].p1, aluno[i].p2, aluno[i].tb, aluno[i].media);
+        } else if(aprovacao==0){
+            printf("||%d||%s||%2.f||%2.f||%2.f||%2.f||\n", aluno[i].rga, aluno[i].nome, aluno[i].p1, aluno[i].p2, aluno[i].tb, aluno[i].media);
+        }
     }
 }
 
@@ -64,6 +70,48 @@ void ordenadoRGA(reg_alunos aluno[], int n){
         for(j = 0; j < n-i-1; j++){
             /*Compara o RGA da posição que está com o próximo*/
             if(aluno[j].rga > aluno[j+1].rga){
+                /*Guarda temporariamente um aluno*/
+                temp = aluno[j];
+                /*Atribui o próximo aluno para a posição do aluno que você está*/
+                aluno[j] = aluno[j+1];
+                /*Devolve o aluno temporario para a próxima posição*/
+                aluno[j+1] = temp;
+                /*Ao fim, você pegou o próximo aluno e colocou na posição em que está, jogando o aluno que ali estava para frente(tornando ele o próximo)*/
+            }
+        }
+    }
+}
+
+/*Ordena os alunos pelo nome usando a técnica bubble sort*/
+void ordenadoNome(reg_alunos aluno[], int n){
+    int i, j;
+    reg_alunos temp;
+    /*Bubble Sort pelo nome*/
+    for(i=0; i<n-1; i++){
+        for(j = 0; j < n-i-1; j++){
+            /*Compara o nome da posição que está com o próximo*/
+            if(strcmp(aluno[j].nome, aluno[j+1].nome) > 0){
+                /*Guarda temporariamente um aluno*/
+                temp = aluno[j];
+                /*Atribui o próximo aluno para a posição do aluno que você está*/
+                aluno[j] = aluno[j+1];
+                /*Devolve o aluno temporario para a próxima posição*/
+                aluno[j+1] = temp;
+                /*Ao fim, você pegou o próximo aluno e colocou na posição em que está, jogando o aluno que ali estava para frente(tornando ele o próximo)*/
+            }
+        }
+    }
+}
+
+/*Ordena os alunos pela media usando a técnica bubble sort*/
+void ordenadoMA(reg_alunos aluno[], int n){
+    int i, j;
+    reg_alunos temp;
+    /*Bubble Sort pela media*/
+    for(i=0; i<n-1; i++){
+        for(j = 0; j < n-i-1; j++){
+            /*Compara a media da posição que está com o próximo*/
+            if(aluno[j].media > aluno[j+1].media){
                 /*Guarda temporariamente um aluno*/
                 temp = aluno[j];
                 /*Atribui o próximo aluno para a posição do aluno que você está*/
@@ -105,9 +153,7 @@ int main(void){
         printf("1: Cadastra alunos\n");
         printf("2: Remove alunos\n");
         printf("3: Atualiza nota pelo rga\n");
-        printf("4: Mostra todos os alunos cadastrados ordenados pelo rga ou nome\n");
-        printf("5: Mostra todos os alunos aprovados ordenados pelo nome\n");
-        printf("6: Mostra todos os alunos reprovados ordenados pela media\n");
+        printf("4: Mostra os alunos cadastrados ordenados\n");
         printf("7: Exibe a média da sala\n");
         printf("8: Exibe a média dos aprovados\n");
         printf("9: Exibe a média dos reprovados\n");
@@ -150,8 +196,34 @@ int main(void){
                         break
                     }
                 }while(aux==1);
-                printTodos(aluno, n);
                 
+                do{
+                    aux=0;
+                    printf("Escolha a visualização:\n");
+                    printf("1:Visualizar todos os alunos");
+                    printf("2:Visualizar apenas os aprovados");
+                    printf("3:Visualizar apenas os reprovados");
+                    scanf(" %d", &i);
+                    switch (i){
+                        case 1:
+                            printTodos(aluno, n, 0);
+                        break;
+
+                        case 2:
+                            printTodos(aluno, n, 1);
+                        break;
+
+                        case 3:
+                            printTodos(aluno, n, -1);
+                        break;
+                        
+                        default:
+                            aux=1;
+                            printf("Escolha SOMENTE entre as três opções:");
+                        break
+                    }
+                }while(aux==1);
+
             break;
 
         }
