@@ -18,6 +18,11 @@ typedef struct{
     int qtd;
 } produtos;
 
+typedef struct{
+    char categoria[31];
+    int qtd;
+} categorias;
+
 /*Printa todos os produtos cadastrados na ordem que estão. Se ordenados por outra função, aparecerão naquela ordem*/
 void printTodos(produtos produto[], int n){
     int i;
@@ -26,6 +31,22 @@ void printTodos(produtos produto[], int n){
         printf("||%d||%s||%s||%.2f||%d||\n", produto[i].cod, produto[i].nome, produto[i].categoria, produto[i].preco, produto[i].qtd);
     }
 }
+
+int contadorCAT(produtos produto[], int n, char categoria[], int qtd){
+    if(n==0){
+        return -1;
+    }
+    else{
+        if(strcmp(produto[n-1].categoria,categoria)==0){
+            return qtd+produto[n-1].qtd;
+        }
+        else{
+            return buscar(produto, n-1, categoria, qtd);
+        }
+    }
+}
+
+
 
 /*Ordena os produtos pelo QTD usando a técnica bubble sort*/
 void ordenadoQTD(produtos produto[], int n){
@@ -229,8 +250,26 @@ int main(void){
             break;
 
             case 6:
+                char categoria;
+                categorias *temp;
+                temp=(produtos *) malloc(qtdMAX * sizeof(produtos));
+                if(temp==NULL){
+                    printf("\nNão foi possível alocar memoria\n");
+                    return 0;
+                }
                 ordenadoCAT(produto, n);
-                printTodos(produto, n);
+                for(i=n-1; i>=0; i++){
+                    for(j=0; j<n-1-i; j++){
+                        if(strcmp(temp[j].categoria,produto[i].categoria;)==0){
+                            aux
+                        }
+                    }
+                    temp[i].categoria=produto[i].categoria;
+                }
+                contadorCAT()
+                for(i=0; i<n-1; i++){
+                    contadorCAT()
+                }
             break;
             
             case 0:
@@ -239,6 +278,7 @@ int main(void){
         }
     }while(num!=0);
 
+    free(temp);
     free(produto);
 
     return 0;
