@@ -153,9 +153,14 @@ void cadastro(produtos produto[], int i, int *n){
 }
 
 int main(void){
-    
+    int n;
+    int i, j, cod, qtd, num, aux, posic, qtdCAT, total, achou;
+    categorias *temp;
     produtos *produto;
     int qtdMAX;
+
+    n=0;
+    
     printf("Quantos produtos diferentes terá no seu sistema?\n");
     scanf(" %d", &qtdMAX);
     produto=(produtos *) malloc(qtdMAX * sizeof(produtos));
@@ -163,10 +168,6 @@ int main(void){
         printf("\nNão foi possível alocar memoria\n");
         return 0;
     }
-
-    int n;
-    int i, j, cod, qtd, num, aux, posic, qtdCAT, total, achou;
-    n=0;
 
     do{
         printf("Escolha uma das opções:\n");
@@ -251,9 +252,7 @@ int main(void){
 
             case 6:
                 qtdCAT=0;
-                categorias *temp;
                 temp=(categorias *) malloc(n * sizeof(categorias));
-
                 if(temp==NULL){
                     printf("\nNão foi possível alocar memória\n");
                 } else {
