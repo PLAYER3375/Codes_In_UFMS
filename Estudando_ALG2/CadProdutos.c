@@ -1,8 +1,8 @@
 /*
 NOME: Matheus Henrique dos Santos Gomes
-DATA: 21/08/2025
+DATA: 31/08/2025
 ALGORITMOS E PROGRAMAÇÃO 2
-PROJETO: SISTEMA DE CADASTRO DE produtoS
+PROJETO: SISTEMA DE CADASTRO DE PRODUTOS
 */
 
 #include<stdio.h>
@@ -32,21 +32,17 @@ void printTodos(produtos produto[], int n){
     }
 }
 
-int contadorCAT(produtos produto[], int n, char categoria[], int qtd){
-    if(n==0){
-        return -1;
+/*conta categorias*/
+int contadorCAT(produtos produto[], int n, char categoria[]) {
+    if(n == 0) {
+        return 0;
     }
-    else{
-        if(strcmp(produto[n-1].categoria,categoria)==0){
-            return qtd+produto[n-1].qtd;
-        }
-        else{
-            return buscar(produto, n-1, categoria, qtd);
-        }
+    if(strcmp(produto[n-1].categoria, categoria) == 0) {
+        return produto[n-1].qtd + contadorCAT(produto, n-1, categoria);
+    } else {
+        return contadorCAT(produto, n-1, categoria);
     }
 }
-
-
 
 /*Ordena os produtos pelo QTD usando a técnica bubble sort*/
 void ordenadoQTD(produtos produto[], int n){
@@ -101,21 +97,16 @@ void ordenadoNome(produtos produto[], int n){
 }
 
 /*Ordena os produtos pela categoria usando a técnica bubble sort*/
-void ordenadoCAT(produtos produto[], int n){
+void ordenadoCAT(categorias vetCAT[], int n){
     int i, j;
-    produtos temp;
+    categorias temp;
     /*Bubble Sort pelo nome*/
     for(i=0; i<n-1; i++){
         for(j = 0; j < n-i-1; j++){
-            /*Compara a categoria da posição que está com o próximo*/
-            if(strcmp(produto[j].categoria, produto[j+1].categoria) > 0){
-                /*Guarda temporariamente um produto*/
-                temp = produto[j];
-                /*Atribui o próximo produto para a posição do produto que você está*/
-                produto[j] = produto[j+1];
-                /*Devolve o produto temporario para a próxima posição*/
-                produto[j+1] = temp;
-                /*Ao fim, você pegou o próximo produto e colocou na posição em que está, jogando o produto que ali estava para frente(tornando ele o próximo)*/
+            if(strcmp(vetCAT[j].categoria, vetCAT[j+1].categoria) > 0){
+                temp = vetCAT[j];
+                vetCAT[j] = vetCAT[j+1];
+                vetCAT[j+1] = temp;
             }
         }
     }
@@ -138,8 +129,17 @@ int buscar(produtos produto[], int n, int cod){
 
 /*Cadastra o produto pedido, usar com looping para cadastrar vários*/
 void cadastro(produtos produto[], int i, int *n){
-    printf("Qual o código do produto?\n");
-    scanf(" %d", &produto[i].cod);
+    int valido;
+
+    do {
+        printf("Qual o código do produto?\n");
+        scanf(" %d", &produto[i].cod);
+        valido=buscar(produto, *n, produto[i].cod);
+        if(valido!=-1){
+            printf("Código já registrado, digite outro.\n");
+        }
+    } while(valido!=-1);
+    
     printf("Qual a categoria do produto?\n");
     scanf(" %30[^\n]", produto[i].categoria);
     printf("Qual o nome do produto?\n");
@@ -158,14 +158,14 @@ int main(void){
     int qtdMAX;
     printf("Quantos produtos diferentes terá no seu sistema?\n");
     scanf(" %d", &qtdMAX);
-    produto = (produtos *) malloc(qtdMAX * sizeof(produtos));
-    if( produto == NULL ){
+    produto=(produtos *) malloc(qtdMAX * sizeof(produtos));
+    if(produto==NULL){
         printf("\nNão foi possível alocar memoria\n");
         return 0;
     }
 
     int n;
-    int i, cod, qtd, num, aux, posic;
+    int i, j, cod, qtd, num, aux, posic, qtdCAT, total, achou;
     n=0;
 
     do{
@@ -250,25 +250,34 @@ int main(void){
             break;
 
             case 6:
-                char categoria;
+                qtdCAT=0;
                 categorias *temp;
-                temp=(produtos *) malloc(qtdMAX * sizeof(produtos));
+                temp=(categorias *) malloc(n * sizeof(categorias));
+
                 if(temp==NULL){
-                    printf("\nNão foi possível alocar memoria\n");
-                    return 0;
-                }
-                ordenadoCAT(produto, n);
-                for(i=n-1; i>=0; i++){
-                    for(j=0; j<n-1-i; j++){
-                        if(strcmp(temp[j].categoria,produto[i].categoria;)==0){
-                            aux
+                    printf("\nNão foi possível alocar memória\n");
+                } else {
+
+                    for(i=0; i<n; i++){
+                        achou = 0;
+                        for(j = 0; j < qtdCAT; j++){
+                            if(strcmp(temp[j].categoria, produto[i].categoria) == 0){
+                                achou = 1;
+                            }
+                        }
+                        if(achou==0){
+                            strcpy(temp[qtdCAT].categoria, produto[i].categoria);
+                            qtdCAT++;
                         }
                     }
-                    temp[i].categoria=produto[i].categoria;
-                }
-                contadorCAT()
-                for(i=0; i<n-1; i++){
-                    contadorCAT()
+                    ordenadoCAT(temp, qtdCAT);
+                    printf("\n||CATEGORIA||TOTAL DE ITENS||\n");
+                    for(i=0; i<qtdCAT; i++){
+                        total=contadorCAT(produto, n, temp[i].categoria);
+                        printf("||%s||%d||\n", temp[i].categoria, total);
+                    }
+
+                    free(temp);
                 }
             break;
             
@@ -278,7 +287,6 @@ int main(void){
         }
     }while(num!=0);
 
-    free(temp);
     free(produto);
 
     return 0;
