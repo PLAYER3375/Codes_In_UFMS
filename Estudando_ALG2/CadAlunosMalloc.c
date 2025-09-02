@@ -23,6 +23,7 @@ Você é livre para criar funções auxiliares caso ache conveniente.
 
 #include<stdio.h>
 #include<string.h>
+#include<stdlib.h>
 
 /*Struct que representa um aluno de Algoritmos e Programação II do 2ºsem. 2025*/
 typedef struct{
@@ -176,11 +177,19 @@ void cadastro(reg_alunos aluno[], int i, int *n){
 }
 
 int main(void){
-    reg_alunos aluno[51];
     int n;
-    int i, qtd, num, aux, posic, rga;
+    int i, qtd, num, aux, posic, qtdMAX, rga;
     char resp;
+    reg_alunos *aluno;
     n=0;
+    
+    printf("Quantos alunos diferentes terá no seu sistema?\n");
+    scanf(" %d", &qtdMAX);
+    aluno=(reg_alunos *) malloc(qtdMAX * sizeof(reg_alunos));
+    if(aluno==NULL){
+        printf("\nNão foi possível alocar memoria\n");
+        return 0;
+    }
 
     do{
         printf("Escolha uma das opções:\n");
@@ -352,6 +361,7 @@ int main(void){
         printf("Deseja fazer outra operação? y/n\n");
         scanf(" %c", &resp);
     }while(resp=='y');
+    free(aluno);
     printf("\n***Fim da execução***\n");
 
     return 0;
