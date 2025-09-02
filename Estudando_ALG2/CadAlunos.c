@@ -61,6 +61,20 @@ void printTodos(reg_alunos aluno[], int n, int aprovacao){
     }
 }
 
+void printMA(reg_alunos aluno[], int n, int aprovacao){
+    int i;
+    printf("||RGA||Nome do aluno||MA||\n");
+    for(i=0; i<n; i++){
+        if(aprovacao==1 && aluno[i].aprovado==1){
+            printf("||%d||%s||%2.f||\n", aluno[i].rga, aluno[i].nome, aluno[i].media);
+        } else if(aprovacao==-1 && aluno[i].aprovado==-1){
+            printf("||%d||%s||%2.f||\n", aluno[i].rga, aluno[i].nome, aluno[i].media);
+        } else if(aprovacao==0){
+            printf("||%d||%s||%2.f||\n", aluno[i].rga, aluno[i].nome, aluno[i].media);
+        }
+    }
+}
+
 /*Ordena os alunos pelo RGA usando a técnica bubble sort*/
 void ordenadoRGA(reg_alunos aluno[], int n){
     int i, j;
@@ -111,7 +125,7 @@ void ordenadoMA(reg_alunos aluno[], int n){
     for(i=0; i<n-1; i++){
         for(j = 0; j < n-i-1; j++){
             /*Compara a media da posição que está com o próximo*/
-            if(aluno[j].media > aluno[j+1].media){
+            if(aluno[j].media < aluno[j+1].media){
                 /*Guarda temporariamente um aluno*/
                 temp = aluno[j];
                 /*Atribui o próximo aluno para a posição do aluno que você está*/
@@ -119,7 +133,27 @@ void ordenadoMA(reg_alunos aluno[], int n){
                 /*Devolve o aluno temporario para a próxima posição*/
                 aluno[j+1] = temp;
                 /*Ao fim, você pegou o próximo aluno e colocou na posição em que está, jogando o aluno que ali estava para frente(tornando ele o próximo)*/
+            } else if(aluno[j].media==aluno[j+1].media){
+                if(strcmp(aluno[j].nome, aluno[j+1].nome) > 0){
+                temp = aluno[j];
+                aluno[j] = aluno[j+1];
+                aluno[j+1] = temp;
+                }
             }
+        }
+    }
+}
+
+int buscar(reg_alunos aluno[], int n, int rga){
+    if(n==0){
+        return -1;
+    }
+    else{
+        if(aluno[n-1].rga==rga){
+            return n-1;
+        }
+        else{
+            return buscar(aluno, n-1, rga);
         }
     }
 }
@@ -142,9 +176,9 @@ void cadastro(reg_alunos aluno[], int i, int *n){
 }
 
 int main(void){
-    reg_alunos aluno[100];
+    reg_alunos aluno[51];
     int n;
-    int i, j, qtd, num, aux;
+    int i, j, qtd, num, aux, posic;
     char resp;
     n=0;
 
@@ -154,9 +188,7 @@ int main(void){
         printf("2: Remove alunos\n");
         printf("3: Atualiza nota pelo rga\n");
         printf("4: Mostra os alunos cadastrados ordenados\n");
-        printf("7: Exibe a média da sala\n");
-        printf("8: Exibe a média dos aprovados\n");
-        printf("9: Exibe a média dos reprovados\n");
+        printf("5: Exibe a média dos alunos\n");
 
         scanf(" %d", &num);
 
@@ -166,6 +198,67 @@ int main(void){
                 scanf(" %d", &qtd);
                 for(i=0; i<qtd; i++){
                     cadastro(aluno, i, &n);
+                }
+            break;
+            
+            case 2:
+                printf("Digite o RGA do aluno que deseja remover:\n");
+                scanf(" %d", &aux);
+                posic=buscar(aluno, n, aux);
+                if(posic==-1){
+                    printf("Não foi possível encontrar esse produto\n");
+                }else if(posic<n-1){
+                    for(i=posic; i<n-1; i++){
+                        aluno[i]=aluno[i+1];
+                    }
+                    n=n-1;
+                    printf("Aluno removido\n");
+                }else if(posic==n-1){
+                    /*proximo aluno cadastrado será por cima dele*/
+                    n=n-1;
+                    printf("Aluno removido\n");
+                }
+            break;
+            
+            case 3:
+                printf("Digite o rga do aluno que deseja atualizar:\n");
+                scanf(" %d", &rga);
+                posic=buscar(aluno, n, rga);
+                if(posic==-1){
+                    printf("Não foi possível encontrar esse produto\n");
+                }else{
+                    printf("******Produto encontrado******\n");
+                    printf("||%d||%s||%.2f||%.2f||%.2f||\n", aluno[posic].rga, aluno[posic].nome, aluno[posic].p1, aluno[posic].p2, aluno[posic].tb);
+                    printf("Deseja atualizar qual informação?\n");
+                    do{
+                        printf("1: P1\n");
+                        printf("2: P2\n");
+                        printf("2: TB\n");
+                        scanf(" %d", &aux);
+                        switch(aux){
+                            case 1:
+                                printf("Digite a nova nota da P1:\n");
+                                scanf(" %f", &aluno[posic].p1);
+                                printf("Nota atualizada\n");
+                            break;
+
+                            case 2:
+                                printf("Digite a nova nota da P2:\n");
+                                scanf(" %f", &aluno[posic].p2);
+                                printf("Nota atualizada\n");
+                            break;
+
+                            case 3:
+                                printf("Digite a nova nota do TB:\n");
+                                scanf(" %f", &aluno[posic].tb);
+                                printf("Nota atualizada\n");
+                            break;
+
+                            default:
+                                printf("Escolha SOMENTE uma das três opções:");
+                            break;
+                        }
+                    }while(aux!=1&&aux!=2&&aux!=3)
                 }
             break;
 
@@ -224,6 +317,35 @@ int main(void){
                     }
                 }while(aux==1);
 
+            break;
+
+            case 5:
+                do{
+                    aux=0;
+                    printf("Escolha a visualização:\n");
+                    printf("1:Visualizar todos os alunos\n");
+                    printf("2:Visualizar apenas os aprovados\n");
+                    printf("3:Visualizar apenas os reprovados\n");
+                    scanf(" %d", &i);
+                    switch (i){
+                        case 1:
+                            printMA(aluno, n, 0);
+                        break;
+
+                        case 2:
+                            printMA(aluno, n, 1);
+                        break;
+
+                        case 3:
+                            printMA(aluno, n, -1);
+                        break;
+                        
+                        default:
+                            aux=1;
+                            printf("Escolha SOMENTE entre as três opções:");
+                        break;
+                    }
+                }while(aux==1);
             break;
 
         }
