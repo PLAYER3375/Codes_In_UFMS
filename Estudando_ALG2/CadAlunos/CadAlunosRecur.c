@@ -88,6 +88,19 @@ void printMARecur(reg_alunos aluno[], int n, int aprovacao){
     }
 }
 
+void printMARecCer(reg_alunos aluno[], int i, int n, int aprovacao){
+    if(i<n){
+        if(aprovacao==1 && aluno[i].aprovado==1){
+            printf("||%d||%s||%2.f||\n", aluno[i].rga, aluno[i].nome, aluno[i].media);
+        } else if(aprovacao==-1 && aluno[i].aprovado==-1){
+            printf("||%d||%s||%2.f||\n", aluno[i].rga, aluno[i].nome, aluno[i].media);
+        } else if(aprovacao==0){
+            printf("||%d||%s||%2.f||\n", aluno[i].rga, aluno[i].nome, aluno[i].media);
+        }
+        printMARecCer(aluno, i+1, n, aprovacao);
+    }
+}
+
 /*Ordena os alunos pelo RGA usando a técnica bubble sort*/
 void ordenadoRGA(reg_alunos aluno[], int n){
     int i, j;
@@ -342,15 +355,15 @@ int main(void){
                     scanf(" %d", &i);
                     switch (i){
                         case 1:
-                            printMARecur(aluno, n-1, 0);
+                            printMARecCer(aluno, 0, n, 0);
                         break;
 
                         case 2:
-                            printMARecur(aluno, n-1, 1);
+                            printMARecCer(aluno, 0, n, 1);
                         break;
 
                         case 3:
-                            printMARecur(aluno, n-1, -1);
+                            printMARecCer(aluno, 0, n, -1);
                         break;
                         
                         default:
