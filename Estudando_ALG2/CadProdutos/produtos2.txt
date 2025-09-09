@@ -1,0 +1,22 @@
+20
+2001;Arroz 5kg;Mercearia;150;25.50
+2002;Feijão Carioca 1kg;Mercearia;200;8.99
+2003;Açúcar Refinado 2kg;Mercearia;180;12.00
+2004;Óleo de Soja 900ml;Mercearia;250;7.50
+2005;Leite Integral 1L;Laticínios;300;5.99
+2006;Queijo Mussarela 500g;Laticínios;100;18.75
+2007;Iogurte Natural 170g;Laticínios;220;3.50
+2008;Biscoito Recheado;Doces e Biscoitos;400;2.99
+2009;Café Torrado e Moído 500g;Bebidas;120;15.00
+2010;Suco de Laranja 1L;Bebidas;170;6.50
+2011;Refrigerante Cola 2L;Bebidas;210;8.00
+2012;Pão de Forma Tradicional;Padaria;190;7.99
+2013;Frango Congelado;Carnes;80;32.50
+2014;Carne Moída 500g;Carnes;90;15.90
+2015;Sabão em Pó 1kg;Limpeza;130;11.25
+2016;Detergente Líquido 500ml;Limpeza;280;3.90
+2017;Papel Higiênico 12 rolos;Higiene;160;18.00
+2018;Shampoo 350ml;Higiene;110;9.99
+2019;Creme Dental;Higiene;240;4.50
+2020;Macarrão Espaguete 500g;Mercearia;230;4.25
+
