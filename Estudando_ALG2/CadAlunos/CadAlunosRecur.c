@@ -77,6 +77,7 @@ void printMA(reg_alunos aluno[], int n, int aprovacao){
 
 void printMARecur(reg_alunos aluno[], int n, int aprovacao){
     if(n>=0){
+        printMARecur(aluno, n-1, aprovacao);/*se colocado antes, printa certo, 0 ao n*/
         if(aprovacao==1 && aluno[n].aprovado==1){
             printf("||%d||%s||%2.f||\n", aluno[n].rga, aluno[n].nome, aluno[n].media);
         } else if(aprovacao==-1 && aluno[n].aprovado==-1){
@@ -84,10 +85,11 @@ void printMARecur(reg_alunos aluno[], int n, int aprovacao){
         } else if(aprovacao==0){
             printf("||%d||%s||%2.f||\n", aluno[n].rga, aluno[n].nome, aluno[n].media);
         }
-        printMARecur(aluno, n-1, aprovacao);
+        /*printMARecur(aluno, n-1, aprovacao);se colocado depois, printa ao contrario, n ao 0*/
     }
 }
 
+/* ******inviavel******
 void printMARecCer(reg_alunos aluno[], int i, int n, int aprovacao){
     if(i<n){
         if(aprovacao==1 && aluno[i].aprovado==1){
@@ -100,6 +102,7 @@ void printMARecCer(reg_alunos aluno[], int i, int n, int aprovacao){
         printMARecCer(aluno, i+1, n, aprovacao);
     }
 }
+*/
 
 /*Ordena os alunos pelo RGA usando a técnica bubble sort*/
 void ordenadoRGA(reg_alunos aluno[], int n){
