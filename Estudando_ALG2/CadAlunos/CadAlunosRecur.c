@@ -358,15 +358,15 @@ int main(void){
                     scanf(" %d", &i);
                     switch (i){
                         case 1:
-                            printMARecCer(aluno, 0, n, 0);
+                            printMARecur(aluno, n, 0);
                         break;
 
                         case 2:
-                            printMARecCer(aluno, 0, n, 1);
+                            printMARecur(aluno, n, 1);
                         break;
 
                         case 3:
-                            printMARecCer(aluno, 0, n, -1);
+                            printMARecur(aluno, n, -1);
                         break;
                         
                         default:
