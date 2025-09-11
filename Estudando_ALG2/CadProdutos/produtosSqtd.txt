@@ -1,0 +1,14 @@
+1001;Notebook;Eletrônicos;50;4500.500000
+1002;Mouse;Acessórios;200;85.900002
+1003;Teclado Mecânico;Acessórios;150;350.000000
+1004;Monitor Ultrawide;Eletrônicos;30;1899.989990
+1005;Webcam Full HD;Periféricos;80;250.750000
+1006;Impressora Multifuncional;Eletrônicos;45;1200.000000
+1007;HD Externo 1TB;Armazenamento;120;380.500000
+1008;SSD 500GB;Armazenamento;90;420.000000
+1009;Roteador Wi-Fi;Redes;60;150.000000
+1010;Headset Gamer;Periféricos;75;450.000000
+1011;Cadeira de Escritório;Móveis;25;890.000000
+1012;Mesa para Computador;Móveis;15;550.000000
+1013;Caixa de Som;Acessórios;110;95.000000
+1014;Microfone Condensador;Periféricos;40;670.000000
