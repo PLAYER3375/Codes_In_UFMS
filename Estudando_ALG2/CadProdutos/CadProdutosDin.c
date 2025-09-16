@@ -55,7 +55,7 @@ int main(void){
         /*leitura para dentro do ponteiro novo*/
         fscanf(prodfile, "%d;%30[^;];%30[^;];%d;%f", &novo->cod, novo->nome, novo->categoria, &novo->qtd, &novo->preco);
         /*o ponteiro recebe a direção do inicio*/
-        novo->prox=produto;
+        novo->prox =produto;
         /*o inicio recebe o novo, empilhando*/
         produto=novo;
         cont++;
