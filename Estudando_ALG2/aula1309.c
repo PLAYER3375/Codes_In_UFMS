@@ -67,8 +67,9 @@ int main(void){
                         }
                         prod->prox=aux;
                     }
+                    free(aux);
                 }
-                free(aux);
+                
             break;
 
             case 2:
@@ -104,7 +105,7 @@ int main(void){
             case 4:
                 prod=Initprod;
                 do{
-                    printf(" %d" prod->cod);
+                    printf(" %d", prod->cod);
                     prod=prod->prox;
                 }while(prod->prox!=NULL);
             break;
