@@ -38,7 +38,11 @@ int busca(produtos *prod, int cod){
 int main(void){
     produtos *Initprod, *prod, *aux, *aux2;
     int i, cod, qtd, num, posic, valid;
-    
+    Initprod=NULL;
+    prod=NULL;
+    aux=NULL;
+    aux2=NULL;
+
     do{
         printf("Escolha uma das opções:\n");
         printf("1: Cadastrar um novo produto\n");
@@ -67,9 +71,8 @@ int main(void){
                         }
                         prod->prox=aux;
                     }
-                    free(aux);
+                    
                 }
-                
             break;
 
             case 2:
@@ -92,10 +95,10 @@ int main(void){
                         }
                         aux2=aux->prox;
                         aux->prox=aux2->prox;
+                        free(aux2);
                     }
                     valid=1;
                 }while(valid==0);
-                free(aux2);
             break;
 
             case 3:
@@ -104,10 +107,10 @@ int main(void){
 
             case 4:
                 prod=Initprod;
-                do{
+                while(prod!=NULL){
                     printf(" %d", prod->cod);
                     prod=prod->prox;
-                }while(prod->prox!=NULL);
+                }
             break;
 
             case 5:
