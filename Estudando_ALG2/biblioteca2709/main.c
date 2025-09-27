@@ -30,6 +30,14 @@ int main(void){
                 scanf(" %[^\n]", nome);
                 colocaFinNome(&p, nome);
             break;
+
+            case 7:
+                colocaTxt(p);
+            break;
+            
+            case 8:
+                pegaTxt(&p);
+            break;
         }
 
     }while(opcao!=0);

@@ -24,6 +24,10 @@ void colocaIniNome(celula **p, char nome[max]);
 
 void colocaFinNome(celula **p, char nome[max]);
 
+void colocaTxt(celula *p);
+
+void pegaTxt(celula **p);
+
 void libera(celula **p);
 
 

@@ -66,6 +66,41 @@ void colocaFinNome(celula **p, char nome[max]){
     }
 }
 
+void pegaTxt(celula **p){
+    FILE *file;
+    char nome[max];
+
+    file=fopen("lista.txt","r");
+    if(file==NULL){
+        printf("Não foi possível abrir o arquivo!\n");
+        return;
+    }
+
+    while(!feof(file)){
+        fscanf(file, " %[^\n]", nome);
+        colocaFinNome(p, nome);
+    }
+    printf("Valores carregados com sucesso");
+    fclose(file);
+}
+
+void colocaTxt(celula *p){
+    FILE *file;
+
+    file=fopen("lista.txt","w");
+    if(file==NULL){
+        printf("Não foi possível abrir o arquivo!\n");
+        return;
+    }
+
+    while(p!=NULL){
+        fprintf(file, "%s\n", p->nome);
+        p=p->prox;
+    }
+    printf("Valores salvos com sucesso");
+    fclose(file);
+}
+
 void libera(celula **p){
     if(*p!=NULL){
         libera(&(*p)->prox);
