@@ -9,11 +9,11 @@ typedef struct cel{
 /*primeiro vira ultimo e segundo vira penultimo*/
 void invertOrdem(celula **lista){
     celula *ant, *atual, *prox;
-    prox=*lista;
-    ant=*lista;
-    atual=ant->prox;
+    prox=NULL;
+    ant=NULL;
+    atual=*lista;
 
-    while(prox!=NULL){
+    while(atual!=NULL){
         prox=atual->prox;
         atual->prox=ant;
         ant=atual;
