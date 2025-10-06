@@ -31,5 +31,4 @@ void rotaciona(celula **lista, int n){
 
     aux->prox=NULL;
 
-    
 }
