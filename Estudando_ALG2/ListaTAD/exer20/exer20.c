@@ -80,6 +80,8 @@ int main(void){
         limpaLista(&lista);
     }
 
+    fclose(arqv);
+    fclose(arqvResp);
 
     return 0;
 }
