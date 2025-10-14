@@ -29,6 +29,8 @@ void addArqv(linha *l, char nomeA[]){
         l=l->prox;
     }
     fprintf(arqv, "\n");
+    
+    fclose(arqv);
 }
 
 void libera(linha **l){
