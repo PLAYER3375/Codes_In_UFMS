@@ -1,0 +1,11 @@
+descriptografar o hello world
+
+/*exemplo do normal*/
+#include<stdio.h>
+int main(void){
+    printf("Hello, World");
+    return 0;
+}
+
+/*exemplo do criptografado*/
+>h.oidts<edulcni#@{)diov(niam tni@;)"dlroW ,olleH"(ftnirp@;0 nruter@}@
