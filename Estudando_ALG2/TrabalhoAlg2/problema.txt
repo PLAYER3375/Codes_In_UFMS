@@ -1,0 +1,22 @@
+Na marcenaria que trabalho, todos os dias, antes de qualquer coisa, é confirido o estoque de chapas de MDF.
+Após a conferência, é recebido todos os planos de corte que devem ser cortados no dia.
+Nem sempre o estoque está na posição exata para apenas colocarmos as chapas na máquina e seguir a seguência
+de planos de corte entregue ao operador.
+Para ajudar e agilizar o processo, farei um programa com as seguintes funcionalidades:
+
+-Manipulação de estoque;
+    -Adicionar chapas manualmente e por arquivo;
+    -Atualizar manualmente as informações das chapas;
+    -Retirar chapas manualmente e após cortadas.
+
+-Sugestão de sequência de corte;
+    -Sugerir trocar a sequência de cortes baseando-se na disposição do estoque.
+
+-Verificação da existência da chapa em estoque;
+
+-Validar plano de corte como cortado;
+
+-Relatório do dia em .txt, podendo ser tirado no decorrer do dia.
+    -Status do estoque;
+    -Chapas já cortadas organizadas pelo decorrer do dia;
+    -Chapas ainda não cortadas.
