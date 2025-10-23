@@ -8,7 +8,7 @@
 --Matheus Henrique dos Santos Gomes
 --Paulo Antonio Blasque Fernandes
 
---Arquivo para povoação do banco de dados:
+--Arquivo para a povoação do banco de dados:
 
 --insert de pessoas
 INSERT INTO Pessoa (cpf, nome, idade) VALUES
