@@ -15,6 +15,8 @@ typedef struct cel{
     struct cel *prox;
 }stock;
 
-void colocaInicio(stock **p, char nome[max]);
+void colocaInicio(stock **p, char nome[max], int espessura);
+
+void atualizaEstoque(stock **p);
 
 #endif
