@@ -11,10 +11,10 @@ int main(void){
     do{
         menu();
         scanf(" %d", &opcao);
-
+        atualizaEstoque(&estoque);
         switch(opcao){
             case 1:
-                atualizaEstoque(&estoque);
+                statusEstoque(&estoque);
             break;
             
             case 2:

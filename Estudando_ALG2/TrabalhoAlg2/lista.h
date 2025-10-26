@@ -22,7 +22,7 @@ celula* alocaNovo();
 
 void colocaInicio(celula **p, char nome[max]);
 
-void colocaFinal(celula **p, char nome[max]);
+void colocaFinal(celula **p, char nome[max], int espessura);
 
 void pegaTxt(celula **p);
 

@@ -4,10 +4,17 @@ void menu()
 {
     printf("\n");
     printf("*********************************\n");
-    printf("1-ATUALIZAR ESTOQUE\n");
-    printf("2-ADICIONAR PLANO DE CORTE\n");
-    printf("3-RETIRAR PLANO DE CORTE\n");
-    printf("4-TROCAR ORDEM DE CORTE\n");
+    printf("1-STATUS DO ESTOQUE\n");
+    printf("2-ADICIONAR AO ESTOQUE\n");
+    printf("3-RETIRAR DO ESTOQUE\n");
+
+    printf("4-STATUS DO PLANO DE CORTE\n");
+    printf("5-ADICIONAR AO PLANO DE CORTE\n");
+    printf("6-RETIRAR DO PLANO DE CORTE\n");
+    printf("7-SUGESTÃO DE ORDEM PARA CORTE\n");
+    printf("8-TROCAR MANUALMENTE A ORDEM DE CORTE\n");
+    
+    printf("9-INICIAR CORTES\n");
     printf("0-FINALIZAR\n");
     printf("*********************************\n");
     printf("Digite a opção desejada: ");
@@ -35,7 +42,7 @@ void printSeq(celula *p){
     }
 }
 
-void colocaFinal(celula **p, char nome[max]){
+void colocaFinal(celula **p, char nome[max], int espessura){
     celula *aux, *fim;
 
     aux=alocaNovo();
@@ -52,6 +59,7 @@ void colocaFinal(celula **p, char nome[max]){
     }
 }
 
+/*
 void pegaTxt(celula **p){
     FILE *file;
     char nome[max];
@@ -70,6 +78,7 @@ void pegaTxt(celula **p){
     fclose(file);
 }
 
+
 void colocaTxt(celula *p, char nomeArqv[]){
     FILE *file;
 
@@ -80,13 +89,14 @@ void colocaTxt(celula *p, char nomeArqv[]){
     }
 
     while(p!=NULL){
-        /*fprintf(file, "%s\n", p->nome);*/
+        fprintf(file, "%s\n", p->nome);
         p=p->prox;
     }
     
     printf("%s salvo com sucesso", nomeArqv);
     fclose(file);
 }
+*/
 
 void libera(celula **p){
     if(*p!=NULL){

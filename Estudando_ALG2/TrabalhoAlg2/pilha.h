@@ -17,6 +17,12 @@ typedef struct cel{
 
 void colocaInicio(stock **p, char nome[max], int espessura);
 
+int qtdChapas(stock *p);
+
 void atualizaEstoque(stock **p);
+
+void addManualEstoque(stock **p);
+
+void statusEstoque(stock *p);
 
 #endif
