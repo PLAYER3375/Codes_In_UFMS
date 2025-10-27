@@ -1,6 +1,6 @@
-#ifndef PILHA_H
+#ifndef STOCK_H
 
-#define PILHA_H
+#define STOCK_H
 
 #include<stdio.h>
 #include<string.h>
@@ -15,7 +15,11 @@ typedef struct cel{
     struct cel *prox;
 }stock;
 
+stock* alocaNovo();
+
 void colocaInicio(stock **p, char nome[max], int espessura);
+
+void colocaFinal(stock **p, char nome[max], int espessura);
 
 int qtdChapas(stock *p);
 

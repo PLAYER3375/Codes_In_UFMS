@@ -1,14 +1,46 @@
-#include"pilha.h"
-#include"lista.h"
+#include"stock.h"
 
-void colocaInicio(stock **p, char nome[max], int espessura){
+stock* alocaNovo(){
+    stock *aux;
+
+    aux=(stock *) malloc(sizeof(stock));
+
+    if(aux==NULL){
+        printf("Não foi possível alocar\n");
+        return NULL;
+    }
+
+    aux->prox=NULL;
+
+    return aux;
+}
+
+void colocaInicio(stock *p, char nome[max], int espessura){
     stock *aux;
 
     aux=alocaNovo();
     strcpy(aux->corChapa, nome);
     aux->espessuraChapa=espessura;
-    aux->prox=(*p)->prox;
-    *p=aux;
+    aux->prox=p->prox;
+    p=aux;
+}
+
+void colocaFinal(stock *p, char nome[max], int espessura){
+    stock *aux, *fim;
+
+    aux=alocaNovo();
+    strcpy(aux->corChapa, nome);
+    aux->espessuraChapa=espessura;
+
+    if(p->prox==NULL){
+        p->prox=aux;
+    } else {
+        fim=p->prox;
+        while(fim->prox!=NULL){
+            fim=fim->prox;
+        }
+        fim->prox=aux;
+    }
 }
 
 int qtdChapas(stock *p){

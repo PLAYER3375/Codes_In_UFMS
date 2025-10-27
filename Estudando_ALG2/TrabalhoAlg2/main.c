@@ -2,7 +2,7 @@
 #include<string.h>
 #include<stdlib.h>
 #include"lista.h"
-#include"pilha.h"
+#include"stock.h"
 
 int main(void){
     int opcao=0, posicChapa=0;
