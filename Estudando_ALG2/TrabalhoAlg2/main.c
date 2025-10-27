@@ -14,11 +14,11 @@ int main(void){
         atualizaEstoque(&estoque);
         switch(opcao){
             case 1:
-                statusEstoque(&estoque);
+                statusEstoque(estoque);
             break;
             
             case 2:
-                
+                addManualEstoque(&estoque);
             break;
 
             case 3:
