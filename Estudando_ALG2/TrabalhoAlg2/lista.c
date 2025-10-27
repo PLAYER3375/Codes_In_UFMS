@@ -35,23 +35,16 @@ celula* alocaNovo(){
     return aux;
 }
 
-void printSeq(celula *p){
-    if(p!=NULL){
-        printf("%s\n", p->nome);
-        printSeq(p->prox);
-    }
-}
-
 void colocaFinal(celula **p, char nome[max], int espessura){
     celula *aux, *fim;
 
     aux=alocaNovo();
     strcpy(aux->nome, nome);
 
-    if(*p==NULL){
-        *p=aux;
+    if((*p)->prox==NULL){
+        (*p)->prox=aux;
     } else {
-        fim=*p;
+        fim=(*p)->prox;
         while(fim->prox!=NULL){
             fim=fim->prox;
         }

@@ -7,14 +7,15 @@ void colocaInicio(stock **p, char nome[max], int espessura){
     aux=alocaNovo();
     strcpy(aux->corChapa, nome);
     aux->espessuraChapa=espessura;
-    aux->prox=*p;
+    aux->prox=(*p)->prox;
     *p=aux;
 }
 
 int qtdChapas(stock *p){
     int x=0;
-    while(p!=NULL){
+    while(p->prox!=NULL){
         x++;
+        p=p->prox;
     }
     return x;
 }
@@ -44,7 +45,7 @@ void atualizaEstoque(stock **p){
     }
 }
 
-void addManualEstoque(stock **p){
+void addManualEstoque(stock *p){
     char nome[max];
     int espessura, qtd=0, i;
 
@@ -63,7 +64,7 @@ void addManualEstoque(stock **p){
 }
 
 void statusEstoque(stock *p){
-    int qtd;
+    int qtd, i=1;
     
     qtd=qtdChapas(p);
 
@@ -72,9 +73,28 @@ void statusEstoque(stock *p){
         printf("|\n");
         printf("V\n");
         while(p!=NULL){
-            printf("%s %dmm\n", p->corChapa, p->espessuraChapa);
+            printf("%d-%s %dmm\n", i, p->corChapa, p->espessuraChapa);
+            i++;
         }
     } else {
         printf("Nenhuma chapa disponível!!!\n");
+    }
+}
+
+void retirarEstoque(stock *p, int posicChapa){
+    stock *aux;
+    int qtd, i;
+
+    qtd=qtdChapas(p);
+
+    if(posicChapa>qtd || posicChapa<1){
+        printf("Posição da chapa inválida");
+    } else {
+        for(i=1; i<posicChapa; i++){
+            p=p->prox;
+        }
+        aux=p->prox;
+        p->prox=aux->prox;
+        free(aux);
     }
 }

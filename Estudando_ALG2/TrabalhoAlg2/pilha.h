@@ -21,8 +21,10 @@ int qtdChapas(stock *p);
 
 void atualizaEstoque(stock **p);
 
-void addManualEstoque(stock **p);
+void addManualEstoque(stock *p);
 
 void statusEstoque(stock *p);
+
+void retirarEstoque(stock *p, int posicChapa);
 
 #endif

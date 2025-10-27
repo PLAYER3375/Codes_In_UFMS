@@ -16,17 +16,15 @@ typedef struct cel{
 
 void menu();
 
-void printSeq(celula *p);
-
 celula* alocaNovo();
 
 void colocaInicio(celula **p, char nome[max]);
 
 void colocaFinal(celula **p, char nome[max], int espessura);
 
-void pegaTxt(celula **p);
+/*void pegaTxt(celula **p);
 
-void colocaTxt(celula *p, char nomeArqv[]);
+void colocaTxt(celula *p, char nomeArqv[]);*/
 
 void libera(celula **p);
 

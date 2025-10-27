@@ -5,24 +5,29 @@
 #include"pilha.h"
 
 int main(void){
-    int opcao;
+    int opcao=0, posicChapa=0;
     stock *estoque=NULL;
+    estoque=(stock *)malloc(sizeof(stock));
 
     do{
         menu();
         scanf(" %d", &opcao);
-        atualizaEstoque(&estoque);
+        atualizaEstoque(estoque);
         switch(opcao){
             case 1:
                 statusEstoque(estoque);
             break;
             
             case 2:
-                addManualEstoque(&estoque);
+                addManualEstoque(estoque);
             break;
 
             case 3:
-                
+                printf("Observe o status do estoque:\n");
+                statusEstoque(estoque);
+                printf("Escolha o número da chapa que deseja retirar: ");
+                scanf(" %d", &posicChapa);
+                retirarEstoque(estoque, posicChapa);
             break;
 
             case 4:
