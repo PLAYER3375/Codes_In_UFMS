@@ -139,6 +139,7 @@ void guardaEstoque(stock *p){
     fclose(arqv);
 }
 
+/*não finalizei 30%*/
 void trocaEstoque(stock *p, int posicIni, int posicFim){
     stock *ant1, *ant2;
     int qtd, i;
