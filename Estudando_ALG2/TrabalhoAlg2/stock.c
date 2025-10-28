@@ -138,3 +138,22 @@ void guardaEstoque(stock *p){
 
     fclose(arqv);
 }
+
+void trocaEstoque(stock *p, int posicIni, int posicFim){
+    stock *ant1, *ant2;
+    int qtd, i;
+
+    qtd=qtdChapas(p);
+
+    if(posicIni>qtd || posicIni<1 || posicFim<1 || posicFim>qtd){
+        printf("Posição da chapa inválida");
+    } else {
+        ant1=p;
+        for(i=1; i<posicIni; i++){
+            ant1=ant1->prox;
+        }
+        ant1=p->prox;
+        p->prox=aux->prox;
+        free(aux);
+    }
+}

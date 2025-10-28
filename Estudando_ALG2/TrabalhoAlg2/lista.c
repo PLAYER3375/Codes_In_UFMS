@@ -5,17 +5,21 @@ void menu()
 {
     printf("\n");
     printf("*********************************\n");
+    printf("OPÇÕES PARA O ESTOQUE:\n");
     printf("1-STATUS DO ESTOQUE\n");
     printf("2-ADICIONAR AO ESTOQUE\n");
     printf("3-RETIRAR DO ESTOQUE\n");
+    printf("4-TROCAR MANUALMENTE A ORDEM DO ESTOQUE\n");
 
-    printf("4-STATUS DO PLANO DE CORTE\n");
-    printf("5-ADICIONAR AO PLANO DE CORTE\n");
-    printf("6-RETIRAR DO PLANO DE CORTE\n");
-    printf("7-SUGESTÃO DE ORDEM PARA CORTE\n");
+    printf("OPÇÕES PARA O PLANO DE CORTE:\n");
+    printf("5-STATUS DO PLANO DE CORTE\n");
+    printf("6-ADICIONAR AO PLANO DE CORTE\n");
+    printf("7-RETIRAR DO PLANO DE CORTE\n");
     printf("8-TROCAR MANUALMENTE A ORDEM DE CORTE\n");
-    
-    printf("9-INICIAR CORTES\n");
+    printf("9-SUGESTÃO DE ORDEM PARA CORTE\n");
+
+    printf("OPÇÕES PARA O REGISTRO DO DIA:\n");
+    printf("10-INICIAR CORTES\n");
     printf("0-FINALIZAR\n");
     printf("*********************************\n");
     printf("Digite a opção desejada: ");

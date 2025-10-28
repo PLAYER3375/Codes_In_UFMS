@@ -35,7 +35,6 @@ int main(void){
             break;
 
             case 3:
-                printf("Observe o status do estoque:\n");
                 statusEstoque(estoque);
                 printf("Escolha o número da chapa que deseja retirar: ");
                 scanf(" %d", &posicChapa);
@@ -43,7 +42,21 @@ int main(void){
             break;
 
             case 4:
-                
+                printf("*********************************\n");
+                printf("QUANTAS CHAPAS VOCÊ IRÁ MANIPULAR?\n");
+                printf("AVISO: Lembre-se que uma chapa é adicionada acima da outra, formando uma pilha.\n");
+                printf("Sendo assim, PEGAR UMA CHAPA E COLOCAR ELA EM OUTRA POSIÇÃO significa:\n");
+                printf("Retirar todas que estão acima dela ou, em alguns casos, até mesmo as abaixo da mesma.\n");
+                printf("*********************************\n");
+                scanf(" %d", &qtd);
+                for(i=0; i<qtd; i++){
+                    statusEstoque(estoque);
+                    printf("Digite a posição da chapa que deseja manipular: \n");
+                    scanf(" %d", &posicChapa);
+                    printf("Digite a posição que deseja deixar a chapa: \n");
+                    scanf(" %d", &espessura);
+                    trocaEstoque(estoque, posicChapa, espessura);
+                }
             break;
             
             case 0:
