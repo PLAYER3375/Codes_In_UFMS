@@ -17,18 +17,22 @@ typedef struct cel{
 
 stock* alocaNovo();
 
-void colocaInicio(stock **p, char nome[max], int espessura);
+void colocaInicio(stock *p, char nome[max], int espessura);
 
-void colocaFinal(stock **p, char nome[max], int espessura);
+void colocaFinal(stock *p, char nome[max], int espessura);
 
 int qtdChapas(stock *p);
 
-void atualizaEstoque(stock **p);
+void atualizaEstoque(stock *p);
 
 void addManualEstoque(stock *p);
 
 void statusEstoque(stock *p);
 
 void retirarEstoque(stock *p, int posicChapa);
+
+void liberaEstoque(stock *p);
+
+void guardaEstoque(stock *p);
 
 #endif

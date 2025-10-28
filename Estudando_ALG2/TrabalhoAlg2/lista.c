@@ -1,3 +1,4 @@
+
 #include"lista.h"
 
 void menu()
@@ -20,6 +21,7 @@ void menu()
     printf("Digite a opção desejada: ");
 }
 
+/*
 celula* alocaNovo(){
     celula *aux;
 
@@ -51,7 +53,7 @@ void colocaFinal(celula **p, char nome[max], int espessura){
         fim->prox=aux;
     }
 }
-
+*/
 /*
 void pegaTxt(celula **p){
     FILE *file;

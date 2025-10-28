@@ -8,11 +8,10 @@ int main(void){
     int opcao=0, posicChapa=0;
     stock *estoque=NULL;
     estoque=(stock *)malloc(sizeof(stock));
-
+    atualizaEstoque(estoque);
     do{
         menu();
         scanf(" %d", &opcao);
-        atualizaEstoque(estoque);
         switch(opcao){
             case 1:
                 statusEstoque(estoque);
@@ -35,7 +34,9 @@ int main(void){
             break;
             
             case 0:
-                
+                guardaEstoque(estoque);
+                estoque=estoque->prox;
+                liberaEstoque(estoque);
             break;
 
             default:

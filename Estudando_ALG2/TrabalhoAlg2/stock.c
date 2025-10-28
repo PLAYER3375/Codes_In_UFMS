@@ -22,7 +22,7 @@ void colocaInicio(stock *p, char nome[max], int espessura){
     strcpy(aux->corChapa, nome);
     aux->espessuraChapa=espessura;
     aux->prox=p->prox;
-    p=aux;
+    p->prox=aux;
 }
 
 void colocaFinal(stock *p, char nome[max], int espessura){
@@ -52,7 +52,7 @@ int qtdChapas(stock *p){
     return x;
 }
 
-void atualizaEstoque(stock **p){
+void atualizaEstoque(stock *p){
     FILE *arqv;
     char nome[max];
     int espessura, qtd;
@@ -68,7 +68,7 @@ void atualizaEstoque(stock **p){
 
     fclose(arqv);
 
-    qtd=qtdChapas(*p);
+    qtd=qtdChapas(p);
 
     if(qtd==0){
         printf("Estoque vazio!!!\n");
@@ -86,7 +86,7 @@ void addManualEstoque(stock *p){
     printf("AVISO: Lembre-se que uma chapa é adicionada acima da outra, formando uma pilha.\n");
     printf("Sendo assim, se for adicionar mais de uma chapa, deve começar de baixo para cima.\n");
 
-    for(i=0; i<=qtd; i++){
+    for(i=0; i<qtd; i++){
         printf("Digite a cor da chapa: \n");
         scanf(" %[^\n]", nome);
         printf("Digite a espessura da chapa: \n");
@@ -104,9 +104,11 @@ void statusEstoque(stock *p){
         printf("As chapas que estão disponíveis estão na seguinte sequência:\n");
         printf("|\n");
         printf("V\n");
+        p=p->prox;
         while(p!=NULL){
             printf("%d-%s %dmm\n", i, p->corChapa, p->espessuraChapa);
             i++;
+            p=p->prox;
         }
     } else {
         printf("Nenhuma chapa disponível!!!\n");
@@ -129,4 +131,28 @@ void retirarEstoque(stock *p, int posicChapa){
         p->prox=aux->prox;
         free(aux);
     }
+}
+
+void liberaEstoque(stock *p){
+    if(p!=NULL){
+        liberaEstoque(p->prox);
+        free(p);
+    }
+}
+
+void guardaEstoque(stock *p){
+    FILE *arqv=NULL;
+    arqv=fopen("estoque.txt", "w");
+    if(arqv==NULL){
+        printf("Não foi possível abrir o arquivo!!!");
+        return;
+    }
+
+    p=p->prox;
+    while(p!=NULL){
+        fprintf(arqv, "%s, %d;\n", p->corChapa, p->espessuraChapa);
+        p=p->prox;
+    }
+
+    fclose(arqv);
 }
