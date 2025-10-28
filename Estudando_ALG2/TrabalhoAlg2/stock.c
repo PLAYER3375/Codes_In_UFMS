@@ -154,7 +154,5 @@ void trocaEstoque(stock *p, int posicIni, int posicFim){
             ant1=ant1->prox;
         }
         ant1=p->prox;
-        p->prox=aux->prox;
-        free(aux);
     }
 }
