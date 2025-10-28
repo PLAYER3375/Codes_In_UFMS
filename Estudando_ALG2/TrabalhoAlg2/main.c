@@ -5,11 +5,13 @@
 #include"stock.h"
 
 int main(void){
-    int opcao=0, posicChapa=0;
+    int opcao=0, qtd=0, espessura, posicChapa=0, i;
+    char nome[max];
     stock *estoque=NULL;
     estoque=(stock *)malloc(sizeof(stock));
     atualizaEstoque(estoque);
     do{
+        qtd=0;
         menu();
         scanf(" %d", &opcao);
         switch(opcao){
@@ -18,7 +20,18 @@ int main(void){
             break;
             
             case 2:
-                addManualEstoque(estoque);
+                printf("Deseja adicionar quantas chapas?\n");
+                scanf(" %d", &qtd);
+                printf("AVISO: Lembre-se que uma chapa é adicionada acima da outra, formando uma pilha.\n");
+                printf("Sendo assim, se for adicionar mais de uma chapa, deve começar de baixo para cima.\n");
+
+                for(i=0; i<qtd; i++){
+                    printf("Digite a cor da chapa: \n");
+                    scanf(" %[^\n]", nome);
+                    printf("Digite a espessura da chapa: \n");
+                    scanf(" %d", &espessura);
+                    colocaInicio(estoque, nome, espessura);
+                }
             break;
 
             case 3:

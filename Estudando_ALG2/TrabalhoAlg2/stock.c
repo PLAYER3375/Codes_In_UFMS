@@ -77,24 +77,6 @@ void atualizaEstoque(stock *p){
     }
 }
 
-void addManualEstoque(stock *p){
-    char nome[max];
-    int espessura, qtd=0, i;
-
-    printf("Deseja adicionar quantas chapas?\n");
-    scanf(" %d", &qtd);
-    printf("AVISO: Lembre-se que uma chapa é adicionada acima da outra, formando uma pilha.\n");
-    printf("Sendo assim, se for adicionar mais de uma chapa, deve começar de baixo para cima.\n");
-
-    for(i=0; i<qtd; i++){
-        printf("Digite a cor da chapa: \n");
-        scanf(" %[^\n]", nome);
-        printf("Digite a espessura da chapa: \n");
-        scanf(" %d", &espessura);
-        colocaInicio(p, nome, espessura);
-    }
-}
-
 void statusEstoque(stock *p){
     int qtd, i=1;
     
