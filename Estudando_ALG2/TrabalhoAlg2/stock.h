@@ -33,4 +33,6 @@ void liberaEstoque(stock *p);
 
 void guardaEstoque(stock *p);
 
+void trocaEstoque(stock *p, int posicIni, int posicFim);
+
 #endif

@@ -141,7 +141,7 @@ void guardaEstoque(stock *p){
 
 /*não finalizei 30%*/
 void trocaEstoque(stock *p, int posicIni, int posicFim){
-    stock *ant1, *ant2;
+    stock *ant1, *ant2, *atual;
     int qtd, i;
 
     qtd=qtdChapas(p);
@@ -153,6 +153,13 @@ void trocaEstoque(stock *p, int posicIni, int posicFim){
         for(i=1; i<posicIni; i++){
             ant1=ant1->prox;
         }
-        ant1=p->prox;
+        atual=ant1->prox;
+        ant1->prox=atual->prox;
+        ant2=p;
+        for(i=1; i<posicFim; i++){
+            ant2=ant2->prox;
+        }
+        atual->prox=ant2->prox;
+        ant2->prox=atual;
     }
 }
