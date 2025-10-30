@@ -1,15 +1,148 @@
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
-#include"lista.h"
+#include"cliente.h"
 #include"stock.h"
+
+typedef struct celula{
+    cliente *cliente;
+    char corChapa[max];
+    int espessura;
+    int cortado;
+    int horaIni;
+    int minIni;
+    int horaFim;
+    int minFim;
+    struct celula *prox;
+}planoCorte;
+
+planoCorte* alocaNovoPla(){
+    planoCorte *aux=NULL;
+
+    aux=(planoCorte *) malloc(sizeof(planoCorte));
+
+    if(aux==NULL){
+        printf("Não foi possível alocar");
+        return NULL;
+    }
+
+    aux->cortado=0;
+    aux->prox=NULL;
+
+    return aux;
+}
+
+void colocaFinalPla(planoCorte *p, cliente *Cli, int id, char nome[max], int espessura){
+    planoCorte *aux=NULL, *fim=NULL;
+
+    aux=alocaNovoPla();
+    aux->cliente=Cli;
+    strcpy(aux->corChapa, nome);
+    aux->espessura=espessura;
+
+    if(p->prox==NULL){
+        p->prox=aux;
+    } else {
+        fim=p->prox;
+        while(fim->prox!=NULL){
+            fim=fim->prox;
+        }
+        fim->prox=aux;
+    }
+}
+
+int qtdPla(planoCorte *p){
+    int x=0;
+    while(p->prox!=NULL){
+        x++;
+        p=p->prox;
+    }
+    return x;
+}
+
+void atualizaPlano(planoCorte *p, cliente *q){
+    FILE *arqv=NULL;
+    char nome[max];
+    int id, espessura, qtd;
+    cliente *pCli=NULL;
+
+    arqv=fopen("arquivostxt/cortes.txt", "r");
+    if(arqv==NULL){
+        printf("Não foi possível abrir o arquivo!\n");
+        return;
+    }
+
+    while(fscanf(arqv, " %d, %[^,], %d;", &id, nome, &espessura)==3){
+        pCli=buscaClienteID(q, id);
+        if(pCli==NULL){
+            printf("Cliente não encontrado, corte ignorado.\n");
+        } else {
+            colocaFinalPla(p, pCli, id, nome, espessura);
+        }
+    }
+
+    fclose(arqv);
+
+    qtd=qtdPla(p);
+
+    if(qtd==0){
+        printf("Nenhum corte cadastrado!!!\n");
+    } else if(qtd>0){
+        printf("Lista de corte atualizada com sucesso!!!\n");
+    }
+}
+
+void liberaPlano(planoCorte **p){
+    if(*p!=NULL){
+        liberaPlano(&(*p)->prox);
+        free(*p);
+    }
+}
+
+void menu()
+{
+    printf("\n");
+    printf("*********************************\n");
+    printf("OPÇÕES PARA CONTROLE DE ESTOQUE:\n");
+    printf("1-STATUS DO ESTOQUE\n");
+    printf("2-ADICIONAR AO ESTOQUE\n");
+    printf("3-RETIRAR DO ESTOQUE\n");
+    printf("4-TROCAR MANUALMENTE A ORDEM DO ESTOQUE\n");
+
+    printf("OPÇÕES PARA CONTROLE DE CLIENTES:\n");
+    printf("5-LISTA DE CLIENTES\n");
+    printf("6-ADICIONAR CLIENTE À LISTA\n");
+    printf("7-RETIRAR CLIENTE DA LISTA\n");
+    printf("8-ATUALIZAR INFORMAÇÕES DO CLIENTE NA LISTA\n");
+
+
+    printf("OPÇÕES PARA CONTROLE DE PLANO DE CORTE:\n");
+    printf("9-STATUS DO PLANO DE CORTE\n");
+    printf("10-ADICIONAR AO PLANO DE CORTE\n");
+    printf("11-RETIRAR DO PLANO DE CORTE\n");
+    printf("12-TROCAR MANUALMENTE A ORDEM DE CORTE\n");
+    printf("13-SUGESTÃO DE ORDEM PARA CORTE\n");
+
+    printf("OPÇÕES PARA O REGISTRO DO DIA:\n");
+    printf("14-INICIAR CORTES\n");
+    printf("0-FINALIZAR\n");
+    printf("*********************************\n");
+    printf("Digite a opção desejada: ");
+}
+
 
 int main(void){
     int opcao=0, qtd=0, espessura, posicChapa=0, i;
     char nome[max];
     stock *estoque=NULL;
+    cliente *clientes=NULL;
+    planoCorte *planoDia=NULL;
     estoque=(stock *)malloc(sizeof(stock));
+    clientes=(cliente *)malloc(sizeof(cliente));
+    planoDia=(planoCorte *)malloc(sizeof(planoCorte));
     atualizaEstoque(estoque);
+    atualizaClientes(clientes);
+    atualizaPlano(planoDia, clientes);
     do{
         qtd=0;
         menu();
@@ -57,6 +190,10 @@ int main(void){
                     scanf(" %d", &espessura);
                     trocaEstoque(estoque, posicChapa, espessura);
                 }
+            break;
+
+            case 5:
+
             break;
             
             case 0:

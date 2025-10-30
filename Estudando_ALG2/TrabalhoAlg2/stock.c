@@ -1,7 +1,7 @@
 #include"stock.h"
 
 stock* alocaNovo(){
-    stock *aux;
+    stock *aux=NULL;
 
     aux=(stock *) malloc(sizeof(stock));
 
@@ -16,7 +16,7 @@ stock* alocaNovo(){
 }
 
 void colocaInicio(stock *p, char nome[max], int espessura){
-    stock *aux;
+    stock *aux=NULL;
 
     aux=alocaNovo();
     strcpy(aux->corChapa, nome);
@@ -26,7 +26,7 @@ void colocaInicio(stock *p, char nome[max], int espessura){
 }
 
 void colocaFinal(stock *p, char nome[max], int espessura){
-    stock *aux, *fim;
+    stock *aux=NULL, *fim=NULL;
 
     aux=alocaNovo();
     strcpy(aux->corChapa, nome);
@@ -53,10 +53,10 @@ int qtdChapas(stock *p){
 }
 
 void atualizaEstoque(stock *p){
-    FILE *arqv;
+    FILE *arqv=NULL;
     char nome[max];
     int espessura, qtd;
-    arqv=fopen("estoque.txt", "r");
+    arqv=fopen("arquivostxt/estoque.txt", "r");
     if(arqv==NULL){
         printf("Não foi possível abrir o arquivo!\n");
         return;
@@ -98,7 +98,7 @@ void statusEstoque(stock *p){
 }
 
 void retirarEstoque(stock *p, int posicChapa){
-    stock *aux;
+    stock *aux=NULL;
     int qtd, i;
 
     qtd=qtdChapas(p);
@@ -124,7 +124,7 @@ void liberaEstoque(stock *p){
 
 void guardaEstoque(stock *p){
     FILE *arqv=NULL;
-    arqv=fopen("estoque.txt", "w");
+    arqv=fopen("arquivostxt/estoque.txt", "w");
     if(arqv==NULL){
         printf("Não foi possível abrir o arquivo!!!");
         return;
@@ -139,9 +139,8 @@ void guardaEstoque(stock *p){
     fclose(arqv);
 }
 
-/*não finalizei 30%*/
 void trocaEstoque(stock *p, int posicIni, int posicFim){
-    stock *ant1, *ant2, *atual;
+    stock *ant1=NULL, *ant2=NULL, *atual=NULL;
     int qtd, i;
 
     qtd=qtdChapas(p);

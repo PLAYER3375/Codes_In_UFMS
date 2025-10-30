@@ -1,0 +1,5 @@
+1, Tania, 5, Closet;
+2, Jefferson, 3, Banheiro social e quarto;
+3, João, 5, Sala e quarto;
+4, Carlos, 1, Suite;
+5, Kleber, 2, Cozinha;

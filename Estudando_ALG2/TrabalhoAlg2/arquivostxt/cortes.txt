@@ -1,0 +1,10 @@
+1, Canela Sevilha, 18;
+1, Nogal Nevada, 18;
+2, Nogueira Natural, 15;
+3, Tauari Arena, 15;
+1, Branco Trama, 18;
+2, Nogal Soft, 6;
+4, Rovere Italiana, 18;
+2, Trancoso, 18;
+5, Branco Cristal, 6;
+2, Chumbo Touch, 18;
