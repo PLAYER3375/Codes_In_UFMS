@@ -1,4 +1,4 @@
-Na marcenaria que trabalho, todos os dias, antes de qualquer coisa, é confirido o estoque de chapas de MDF.
+Na marcenaria que trabalho todos os dias, antes de qualquer coisa, é confirido o estoque de chapas de MDF.
 Após a conferência, é recebido todos os planos de corte que devem ser cortados no dia.
 Nem sempre o estoque está na posição exata para apenas colocarmos as chapas na máquina e seguir a seguência
 de planos de corte entregue ao operador.
