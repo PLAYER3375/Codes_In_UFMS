@@ -112,6 +112,7 @@ void retirarEstoque(stock *p, int posicChapa){
         aux=p->prox;
         p->prox=aux->prox;
         free(aux);
+        printf("Chapa retirada com sucesso!!!\n");
     }
 }
 

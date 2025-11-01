@@ -23,6 +23,17 @@ cliente* buscaClienteID(cliente *p, int id){
     return p;
 }
 
+int buscaClienteIDint(cliente *p, int id){
+    while(p!=NULL && p->idCli!=id){
+        p=p->prox;
+    }
+    if(p==NULL){
+        return 0;
+    } else {
+        return 1;
+    }
+}
+
 void colocaFinalCli(cliente *p, int id, char nome[max], int prioridade, char ambiente[max]){
     cliente *aux=NULL, *fim=NULL;
 
@@ -50,6 +61,26 @@ int qtdClientes(cliente *p){
         p=p->prox;
     }
     return x;
+}
+
+void statusCliente(cliente *p){
+    int qtd;
+    
+    qtd=qtdClientes(p);
+
+    if(qtd>0){
+        printf("Os clientes disponíveis são:\n");
+        printf("|\n");
+        printf("V\n");
+        p=p->prox;
+        printf("  ID  ||  NOME  ||  AMBIENTE  ||  PRIORIDADE\n");
+        while(p!=NULL){
+            printf("  %d  ||  %s  ||  %s  ||  %d\n", p->idCli, p->nomeCli, p->ambiente, p->prioridade);
+            p=p->prox;
+        }
+    } else {
+        printf("Nenhuma chapa disponível!!!\n");
+    }
 }
 
 void atualizaClientes(cliente *p){

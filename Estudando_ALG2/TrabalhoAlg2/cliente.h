@@ -21,9 +21,13 @@ cliente* alocaNovoCli();
 
 cliente* buscaClienteID(cliente *p, int id);
 
+int buscaClienteIDint(cliente *p, int id);
+
 void colocaFinalCli(cliente *p, int id, char nome[max], int prioridade, char ambiente[max]);
 
 int qtdClientes(cliente *p);
+
+void statusCliente(cliente *p);
 
 void atualizaClientes(cliente *p);
 

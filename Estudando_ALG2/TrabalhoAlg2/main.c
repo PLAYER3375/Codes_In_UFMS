@@ -132,17 +132,20 @@ void menu()
 
 
 int main(void){
-    int opcao=0, qtd=0, espessura, posicChapa=0, i;
-    char nome[max];
+    int opcao=0, qtd=0, espessura, posicChapa=0, i, idCli=-1;
+    char nome[max], ambiente[max];
     stock *estoque=NULL;
     cliente *clientes=NULL;
     planoCorte *planoDia=NULL;
+    
     estoque=(stock *)malloc(sizeof(stock));
     clientes=(cliente *)malloc(sizeof(cliente));
     planoDia=(planoCorte *)malloc(sizeof(planoCorte));
+    
     atualizaEstoque(estoque);
     atualizaClientes(clientes);
     atualizaPlano(planoDia, clientes);
+    
     do{
         qtd=0;
         menu();
@@ -153,10 +156,12 @@ int main(void){
             break;
             
             case 2:
-                printf("Deseja adicionar quantas chapas?\n");
-                scanf(" %d", &qtd);
+                printf("*********************************\n");
                 printf("AVISO: Lembre-se que uma chapa é adicionada acima da outra, formando uma pilha.\n");
                 printf("Sendo assim, se for adicionar mais de uma chapa, deve começar de baixo para cima.\n");
+                printf("*********************************\n");
+                printf("Deseja adicionar quantas chapas?\n");
+                scanf(" %d", &qtd);
 
                 for(i=0; i<qtd; i++){
                     printf("Digite a cor da chapa: \n");
@@ -164,6 +169,7 @@ int main(void){
                     printf("Digite a espessura da chapa: \n");
                     scanf(" %d", &espessura);
                     colocaInicio(estoque, nome, espessura);
+                    printf("Chapa adicionada com sucesso!!!\n");
                 }
             break;
 
@@ -176,11 +182,11 @@ int main(void){
 
             case 4:
                 printf("*********************************\n");
-                printf("QUANTAS CHAPAS VOCÊ IRÁ MANIPULAR?\n");
                 printf("AVISO: Lembre-se que uma chapa é adicionada acima da outra, formando uma pilha.\n");
                 printf("Sendo assim, PEGAR UMA CHAPA E COLOCAR ELA EM OUTRA POSIÇÃO significa:\n");
                 printf("Retirar todas que estão acima dela ou, em alguns casos, até mesmo as abaixo da mesma.\n");
                 printf("*********************************\n");
+                printf("QUANTAS CHAPAS VOCÊ IRÁ MANIPULAR?\n");
                 scanf(" %d", &qtd);
                 for(i=0; i<qtd; i++){
                     statusEstoque(estoque);
@@ -189,11 +195,40 @@ int main(void){
                     printf("Digite a posição que deseja deixar a chapa: \n");
                     scanf(" %d", &espessura);
                     trocaEstoque(estoque, posicChapa, espessura);
+                    printf("Chapa movida com sucesso!!!\n");
                 }
             break;
 
             case 5:
-
+                statusCliente(clientes);
+            break;
+            
+            case 6:
+                printf("Deseja adicionar quantos clientes?\n");
+                scanf(" %d", &qtd);
+                for(i=0; i<qtd; i++){
+                    do{
+                        printf("Digite o ID do cliente: \n");
+                        scanf(" %d", &idCli);
+                        espessura=buscaClienteIDint(clientes->prox, idCli);
+                        if(espessura==1){
+                            printf("Outro cliente possui o mesmo id, por favor, refaça o cadastro.\n");
+                        }
+                    }while(espessura==1);
+                    printf("Digite o nome do cliente: \n");
+                    scanf(" %[^\n]", nome);
+                    printf("Digite os ambientes do cliente: \n");
+                    scanf(" %[^\n]", ambiente);
+                    do{
+                        printf("Digite a prioridade do cliente (de 1 até 5, sendo 5 a prioridade mais alta): \n");
+                        scanf(" %d", &posicChapa);
+                        if(posicChapa<1 || posicChapa>5){
+                            printf("Escolha SOMENTE entre 1 e 5.\n");
+                        }
+                    }while(posicChapa<1 || posicChapa>5);
+                    colocaFinalCli(clientes, idCli, nome, posicChapa, ambiente);
+                    printf("Cliente adicionado com sucesso!!!\n");
+                }
             break;
             
             case 0:
