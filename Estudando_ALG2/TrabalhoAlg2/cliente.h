@@ -29,6 +29,8 @@ int qtdClientes(cliente *p);
 
 void statusCliente(cliente *p);
 
+void retirarCliente(cliente *p, int idCliente);
+
 void atualizaClientes(cliente *p);
 
 void liberaCli(cliente **p);

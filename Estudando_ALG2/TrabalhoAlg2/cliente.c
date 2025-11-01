@@ -83,6 +83,29 @@ void statusCliente(cliente *p){
     }
 }
 
+void retirarCliente(cliente *p, int idCliente){
+    cliente *aux=NULL;
+    
+    while(p->prox!=NULL && p->prox->idCli!=idCliente){
+        p=p->prox;
+    }
+    if(p!=NULL){
+        aux=p->prox;
+        p->prox=aux->prox;
+        free(aux);
+        printf("Cliente retirado com sucesso!!!\n");
+    } else {
+        printf("Cliente não encontrado, operação  de retirada ignorada.\n");
+    }
+}
+
+void liberaCliente(cliente *p){
+    if(p!=NULL){
+        liberaCliente(p->prox);
+        free(p);
+    }
+}
+
 void atualizaClientes(cliente *p){
     FILE *arqv=NULL;
     char nome[max], ambiente[max];

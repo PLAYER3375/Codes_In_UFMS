@@ -231,6 +231,18 @@ int main(void){
                 }
             break;
             
+            case 7:
+                statusCliente(clientes);
+                qtd=qtdClientes(clientes);
+                if(qtd!=0){
+                    printf("Escolha o id do cliente que deseja retirar: ");
+                    scanf(" %d", &posicChapa);
+                    retirarCliente(clientes, posicChapa);
+                } else {
+                    printf("Nenhum cliente para retirar.\n");
+                }
+            break;
+            
             case 0:
                 guardaEstoque(estoque);
                 estoque=estoque->prox;
