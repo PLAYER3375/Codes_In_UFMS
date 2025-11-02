@@ -243,6 +243,43 @@ int main(void){
                 }
             break;
             
+            case 8:
+                statusCliente(clientes);
+                qtd=qtdClientes(clientes);
+                if(qtd!=0){
+                    printf("Escolha o id do cliente que deseja atualizar as informações: ");
+                    scanf(" %d", &posicChapa);
+                    do{
+                        printf("OPÇÕES DE INFORMAÇÕES ATUALIZÁVEIS:\n");
+                        printf("1-ID\n");
+                        printf("2-NOME\n");
+                        printf("3-AMBIENTE\n");
+                        printf("4-PRIORIDADE\n");
+                        printf("Qual informação deseja atualizar: ");
+                        scanf(" %d", &espessura);
+                    
+                        switch(espessura){
+                            case 1:
+                            break;
+                            
+                            case 2:
+                            break;
+                            
+                            case 3:
+                            break;
+                            
+                            case 4:
+                            break;
+                        }
+                        if(espessura<1 || espessura>4){
+                            printf("OPÇÃO INVÁLIDA. POR FAVOR ESCOLHA OUTRO\n");
+                        }
+                    }while(espessura<1 || espessura>4);
+                } else {
+                    printf("Nenhum cliente para atualizar informações.\n");
+                }
+            break;
+            
             case 0:
                 guardaEstoque(estoque);
                 estoque=estoque->prox;
