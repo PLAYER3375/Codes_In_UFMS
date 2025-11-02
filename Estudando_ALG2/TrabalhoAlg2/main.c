@@ -266,9 +266,15 @@ int main(void){
                             break;
                             
                             case 2:
+                                printf("Digite o novo nome do cliente: ");
+                                scanf(" %[^\n]", &nome);
+                                atualizaNOMECliente(clientes, idCli, nome);
                             break;
                             
                             case 3:
+                                printf("Digite novamente os ambientes do cliente: ");
+                                scanf(" %[^\n]", &nome);
+                                atualizaAmbiCliente(clientes, idCli, nome);
                             break;
                             
                             case 4:
