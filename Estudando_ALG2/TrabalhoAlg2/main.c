@@ -248,7 +248,7 @@ int main(void){
                 qtd=qtdClientes(clientes);
                 if(qtd!=0){
                     printf("Escolha o id do cliente que deseja atualizar as informações: ");
-                    scanf(" %d", &posicChapa);
+                    scanf(" %d", &idCli);
                     do{
                         printf("OPÇÕES DE INFORMAÇÕES ATUALIZÁVEIS:\n");
                         printf("1-ID\n");
@@ -260,6 +260,9 @@ int main(void){
                     
                         switch(espessura){
                             case 1:
+                                printf("Digite o novo ID do cliente: ");
+                                scanf(" %d", &posicChapa);
+                                atualizaIDCliente(clientes, idCli, posicChapa);
                             break;
                             
                             case 2:
@@ -269,6 +272,9 @@ int main(void){
                             break;
                             
                             case 4:
+                                printf("Digite a nova prioridade do cliente: ");
+                                scanf(" %d", &posicChapa);
+                                atualizaPrioCliente(clientes, idCli, posicChapa);
                             break;
                         }
                         if(espessura<1 || espessura>4){

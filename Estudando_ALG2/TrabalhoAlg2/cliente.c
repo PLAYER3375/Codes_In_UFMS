@@ -109,51 +109,25 @@ void liberaCliente(cliente *p){
 void atualizaNomeCliente(cliente *p, int idCliente, char nome[max]){
     cliente *aux=NULL;
     aux=buscaClienteID(p, idCliente);
-    
-    if(aux!=NULL){
-        printf("Qual informação deseja atualizar: \n");
-    } else {
-        printf("Cliente não encontrado, operação  de retirada ignorada.\n");
-    }
+    strcpy(aux->nomeCli, nome);
 }
 
 void atualizaIDCliente(cliente *p, int idCliente, int idTroca){
     cliente *aux=NULL;
-    
-    while(p!=NULL && p->idCli!=idCliente){
-        p=p->prox;
-    }
-    if(p!=NULL){
-        printf("Qual informação deseja atualizar: \n");
-    } else {
-        printf("Cliente não encontrado, operação  de retirada ignorada.\n");
-    }
+    aux=buscaClienteID(p, idCliente);
+    aux->idCli=idTroca;
 }
 
 void atualizaAmbiCliente(cliente *p, int idCliente, char nome[max]){
     cliente *aux=NULL;
-    
-    while(p!=NULL && p->idCli!=idCliente){
-        p=p->prox;
-    }
-    if(p!=NULL){
-        printf("Qual informação deseja atualizar: \n");
-    } else {
-        printf("Cliente não encontrado, operação  de retirada ignorada.\n");
-    }
+    aux=buscaClienteID(p, idCliente);
+    strcpy(aux->ambiente, nome);
 }
 
 void atualizaPrioCliente(cliente *p, int idCliente, int prioridade){
     cliente *aux=NULL;
-    
-    while(p!=NULL && p->idCli!=idCliente){
-        p=p->prox;
-    }
-    if(p!=NULL){
-        printf("Qual informação deseja atualizar: \n");
-    } else {
-        printf("Cliente não encontrado, operação  de retirada ignorada.\n");
-    }
+    aux=buscaClienteID(p, idCliente);
+    aux->prioridade=prioridade;
 }
 
 void atualizaClientes(cliente *p){
