@@ -60,6 +60,16 @@ int qtdPla(planoCorte *p){
     return x;
 }
 
+void adicionaPlano(planoCorte *p, cliente *clientes, char nome[max], int espessura, int idCli){
+    cliente *aux=NULL;
+    aux=buscaClienteID(clientes, idCli);
+    if(aux==NULL){
+        printf("Cliente não encontrado, corte ignorado.\n");
+        return;
+    }
+    colocaFinalPla(p, aux, idCli, nome, espessura);
+}
+
 void atualizaPlano(planoCorte *p, cliente *q){
     FILE *arqv=NULL;
     char nome[max];
@@ -92,6 +102,49 @@ void atualizaPlano(planoCorte *p, cliente *q){
     }
 }
 
+void trocaPlano(planoCorte *p, int posicIni, int posicFim){
+    int qtd = 0, i = 0;
+    planoCorte *prev1 = NULL, *node = NULL, *prev2 = NULL;
+
+    qtd = qtdPla(p);
+    if(posicIni > qtd || posicIni < 1 || posicFim < 1 || posicFim > qtd){
+        printf("Posição da corte inválida\n");
+        return;
+    }
+    if(posicIni == posicFim) return;
+
+    prev1 = p;
+    for(i = 1; i < posicIni; i++) prev1 = prev1->prox;
+    node = prev1->prox;         
+    prev1->prox = node->prox;
+
+    if(posicIni < posicFim) posicFim--;
+
+    prev2 = p;
+    for(i = 1; i < posicFim; i++) prev2 = prev2->prox;
+
+    node->prox = prev2->prox;
+    prev2->prox = node;
+}
+
+
+void retirarPlano(planoCorte *p, int idCliente){
+    planoCorte *aux=NULL;
+    while(p->prox!=NULL && p->prox->cliente->idCli!=idCliente){
+        p=p->prox;
+    }
+    if(p->prox!=NULL){
+        aux=p->prox;
+        p->prox=aux->prox;
+        free(aux);
+        printf("Plano de corte removido com sucesso!!!\n");
+    } else {
+        printf("Plano não encontrado, operação ignorada.\n");
+    }
+}
+
+
+
 void statusCortes(planoCorte *p){
     int qtd;
     char cortado[6];
@@ -119,11 +172,86 @@ void statusCortes(planoCorte *p){
     }
 }
 
+void guardaNCortados(planoCorte *p){
+    FILE *arqv=NULL;
+    planoCorte *aux=NULL;
+
+    arqv=fopen("arquivostxt/cortes.txt", "w");
+    if(arqv==NULL){
+        printf("Não foi possível abrir cortes.txt para salvar cortes\n");
+        return;
+    }
+
+    aux=p->prox;
+    while(aux!=NULL){
+        if(aux->cortado==0){
+            fprintf(arqv, "%d, %s, %d;\n", aux->cliente->idCli, aux->corChapa, aux->espessura);
+        }
+        aux=aux->prox;
+    }
+
+    fclose(arqv);
+}
+
 void liberaPlano(planoCorte **p){
     if(*p!=NULL){
         liberaPlano(&(*p)->prox);
         free(*p);
     }
+}
+
+int temChapaEmEstoque(stock *estoque, char cor[max], int espessura){
+    stock *s=NULL;
+    int encontrado=0;
+
+    if(estoque==NULL)
+        return 0;
+
+    if(strcmp(s->corChapa, cor) == 0 && s->espessuraChapa == espessura){
+        return 1;
+    }
+    encontrado = temChapaEmEstoque(s, cor, espessura);
+    return encontrado;
+}
+
+void gravaRelatorio(planoCorte *planoCorte1, stock *estoque){
+    FILE *arqv=NULL;
+    planoCorte *planoCorte2=planoCorte1;
+    int tem=0;
+
+    arqv=fopen("relatorioDia.txt", "w");
+    if(arqv==NULL){
+        printf("Não foi possível criar relatorioDia.txt\n");
+        return;
+    }
+    fprintf(arqv, "*********************************\n");
+    fprintf(arqv, "PLANOS CORTADOS:\n");
+    planoCorte1=planoCorte1->prox;
+    while(planoCorte1!=NULL){
+        if(planoCorte1->cortado == 1){
+            fprintf(arqv, "Cliente: %s | Ambiente: %s | Chapa: %s %dmm | Inicio: %02d:%02d | Fim: %02d:%02d\n", planoCorte1->cliente->nomeCli, planoCorte1->cliente->ambiente, planoCorte1->corChapa, planoCorte1->espessura, planoCorte1->horaIni, planoCorte1->minIni, planoCorte1->horaFim, planoCorte1->minFim);
+        }
+        planoCorte1=planoCorte1->prox;
+    }
+    fprintf(arqv, "*********************************\n\n");
+
+    fprintf(arqv, "*********************************\n");
+    fprintf(arqv, "PLANOS NÃO CORTADOS:\n");
+    planoCorte2=planoCorte2->prox;
+    while(planoCorte2!=NULL){
+        if(planoCorte2->cortado==0){
+            tem=temChapaEmEstoque(estoque->prox, planoCorte2->corChapa, planoCorte2->espessura);
+            if(tem==1){
+                fprintf(arqv, "Cliente: %s | Ambiente: %s | Chapa: %s %dmm | Em estoque: Sim\n", planoCorte2->cliente->nomeCli, planoCorte2->cliente->ambiente, planoCorte2->corChapa, planoCorte2->espessura);
+            } else {
+                fprintf(arqv, "Cliente: %s | Ambiente: %s | Chapa: %s %dmm | Em estoque: Não\n", planoCorte2->cliente->nomeCli, planoCorte2->cliente->ambiente, planoCorte2->corChapa, planoCorte2->espessura);
+            }
+        }
+        planoCorte2=planoCorte2->prox;
+    }
+    fprintf(arqv, "*********************************\n\n");
+    fclose(arqv);
+    printf("Relatório do dia gerado: relatorioDia.txt\n");
 }
 
 void menu()
@@ -147,11 +275,10 @@ void menu()
     printf("9-STATUS DO PLANO DE CORTE\n");
     printf("10-ADICIONAR AO PLANO DE CORTE\n");
     printf("11-RETIRAR DO PLANO DE CORTE\n");
-    printf("12-TROCAR MANUALMENTE A ORDEM DE CORTE\n");
-    printf("13-SUGESTÃO DE ORDEM PARA CORTE\n\n");
+    printf("12-TROCAR MANUALMENTE A ORDEM DE CORTE\n\n");
 
     printf("OPÇÕES PARA O REGISTRO DO DIA:\n");
-    printf("14-INICIAR CORTES\n");
+    printf("13-INICIAR CORTES\n");
     printf("0-FINALIZAR\n");
     printf("*********************************\n");
     printf("Digite a opção desejada: ");
@@ -159,11 +286,11 @@ void menu()
 
 
 int main(void){
-    int opcao=0, qtd=0, espessura, posicChapa=0, i, idCli=-1;
-    char nome[max], ambiente[max];
+    int opcao=0, qtd=0, espessura, posicChapa=0, i, idCli=-1, hIni, mIni, hFim, mFim;
+    char nome[max], ambiente[max], confirma;
     stock *estoque=NULL;
     cliente *clientes=NULL;
-    planoCorte *planoDia=NULL;
+    planoCorte *planoDia=NULL, *percorrePlano=NULL;
     
     estoque=(stock *)malloc(sizeof(stock));
     clientes=(cliente *)malloc(sizeof(cliente));
@@ -246,14 +373,7 @@ int main(void){
                     scanf(" %[^\n]", nome);
                     printf("Digite os ambientes do cliente: \n");
                     scanf(" %[^\n]", ambiente);
-                    do{
-                        printf("Digite a prioridade do cliente (de 1 até 5, sendo 5 a prioridade mais alta): \n");
-                        scanf(" %d", &posicChapa);
-                        if(posicChapa<1 || posicChapa>5){
-                            printf("Escolha SOMENTE entre 1 e 5.\n");
-                        }
-                    }while(posicChapa<1 || posicChapa>5);
-                    colocaFinalCli(clientes, idCli, nome, posicChapa, ambiente);
+                    colocaFinalCli(clientes, idCli, nome, ambiente);
                     printf("Cliente adicionado com sucesso!!!\n");
                 }
             break;
@@ -288,7 +408,6 @@ int main(void){
                         printf("1-ID\n");
                         printf("2-NOME\n");
                         printf("3-AMBIENTE\n");
-                        printf("4-PRIORIDADE\n");
                         printf("Qual informação deseja atualizar: ");
                         scanf(" %d", &espessura);
                     
@@ -316,12 +435,6 @@ int main(void){
                                 printf("Digite novamente os ambientes do cliente: ");
                                 scanf(" %[^\n]", nome);
                                 atualizaAmbiCliente(clientes, idCli, nome);
-                            break;
-                            
-                            case 4:
-                                printf("Digite a nova prioridade do cliente: ");
-                                scanf(" %d", &posicChapa);
-                                atualizaPrioCliente(clientes, idCli, posicChapa);
                             break;
                         }
                         if(espessura<1 || espessura>4){
@@ -352,14 +465,84 @@ int main(void){
                 scanf(" %[^\n]", nome);
                 printf("Coloque espessura da chapa: ");
                 scanf(" %d", &espessura);
-                adicionaPlano(planoDia, idCli, nome, espessura);
-                reorganizaPlaPrioCliente(planoDia, clientes);
+                adicionaPlano(planoDia, clientes, nome, espessura, idCli);
             break;
+
+            case 11:
+                statusCortes(planoDia);
+                qtd=qtdPla(planoDia);
+                if(qtd!=0){
+                    printf("Coloque o id do cliente do plano que deseja retirar: ");
+                    scanf(" %d", &idCli);
+                    retirarPlano(planoDia, idCli);
+                } else {
+                    printf("Nenhum plano para retirar.\n");
+                }
+            break;
+
+            case 12:
+                printf("QUANTAS MUDANÇAS NA ORDEM VOCÊ IRÁ FAZER? ");
+                scanf(" %d", &qtd);
+                for(i=0; i<qtd; i++){
+                    statusCortes(planoDia);
+                    printf("Digite a posição do corte que deseja manipular: \n");
+                    scanf(" %d", &posicChapa);
+                    printf("Digite a posição que deseja deixar o corte: \n");
+                    scanf(" %d", &espessura);
+                    trocaPlano(planoDia, posicChapa, espessura);
+                    printf("Corte movido com sucesso!!!\n");
+                }
+            break;
+
+            case 13:{
+                if(planoDia->prox==NULL){
+                    printf("Nenhum corte cadastrado!!!\n");
+                } else {
+                    /* declaração feita no topo da função main */
+                    percorrePlano = planoDia->prox;
+                    while(percorrePlano!=NULL){
+                        printf("Corte atual: cliente %s - chapa %s %dmm\n", percorrePlano->cliente->nomeCli, percorrePlano->corChapa, percorrePlano->espessura);
+                        printf("Deseja cortar esta chapa agora? (s/n): ");
+                        scanf(" %c", &confirma);
+                        if(confirma=='s'){
+                            /* verifica se chapa existe no estoque */
+                            posicChapa = encontraPosEstoque(estoque, percorrePlano->corChapa, percorrePlano->espessura);
+                            if(posicChapa > 0){
+                                printf("Chapa encontrada em estoque na posição %d.\n", posicChapa);
+                                printf("Digite hora e minuto de INICIO (HH MM): ");
+                                scanf(" %d %d", &hIni, &mIni);
+                                printf("Digite hora e minuto de FIM (HH MM): ");
+                                scanf(" %d %d", &hFim, &mFim);
+                                percorrePlano->horaIni=hIni;
+                                percorrePlano->minIni=mIni;
+                                percorrePlano->horaFim=hFim;
+                                percorrePlano->minFim=mFim;
+                                percorrePlano->cortado=1;
+                                /* remove chapa do estoque assim que cortada */
+                                retirarEstoque(estoque, posicChapa);
+                                printf("Corte realizado e chapa removida do estoque.\n");
+                            } else {
+                                printf("Chapa não encontrada em estoque. Não é possível cortar.\n");
+                            }
+                        } else {
+                            printf("Pulando este corte.\n");
+                        }
+                        percorrePlano = percorrePlano->prox;
+                    }
+                }
+            } break;
             
-            case 0:
+            case 0: 
                 guardaEstoque(estoque);
+                guardaClientes(clientes);
+                guardaNCortados(planoDia);
+                geraRelatorio(planoDia, estoque);
                 estoque=estoque->prox;
+                clientes=clientes->prox;
+                planoDia=planoDia->prox;
                 liberaEstoque(estoque);
+                liberaCli(clientes);
+                liberaPlano(planoDia);
             break;
 
             default:

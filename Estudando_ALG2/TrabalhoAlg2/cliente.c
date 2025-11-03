@@ -34,13 +34,12 @@ int buscaClienteIDint(cliente *p, int id){
     }
 }
 
-void colocaFinalCli(cliente *p, int id, char nome[max], int prioridade, char ambiente[max]){
+void colocaFinalCli(cliente *p, int id, char nome[max], char ambiente[max]){
     cliente *aux=NULL, *fim=NULL;
 
     aux=alocaNovoCli();
     aux->idCli=id;
     strcpy(aux->nomeCli, nome);
-    aux->prioridade=prioridade;
     strcpy(aux->ambiente, ambiente);
 
     if(p->prox==NULL){
@@ -73,9 +72,9 @@ void statusCliente(cliente *p){
         printf("|\n");
         printf("V\n");
         p=p->prox;
-        printf("  ID  ||  NOME  ||  AMBIENTE  ||  PRIORIDADE\n");
+        printf("  ID  ||  NOME  ||  AMBIENTE\n");
         while(p!=NULL){
-            printf("  %d  ||  %s  ||  %s  ||  %d\n", p->idCli, p->nomeCli, p->ambiente, p->prioridade);
+            printf("  %d  ||  %s  ||  %s\n", p->idCli, p->nomeCli, p->ambiente);
             p=p->prox;
         }
     } else {
@@ -124,24 +123,18 @@ void atualizaAmbiCliente(cliente *p, int idCliente, char nome[max]){
     strcpy(aux->ambiente, nome);
 }
 
-void atualizaPrioCliente(cliente *p, int idCliente, int prioridade){
-    cliente *aux=NULL;
-    aux=buscaClienteID(p, idCliente);
-    aux->prioridade=prioridade;
-}
-
 void atualizaClientes(cliente *p){
     FILE *arqv=NULL;
     char nome[max], ambiente[max];
-    int id, prioridade, qtd;
+    int id, qtd;
     arqv=fopen("arquivostxt/clientes.txt", "r");
     if(arqv==NULL){
         printf("Não foi possível abrir o arquivo!\n");
         return;
     }
 
-    while(fscanf(arqv, " %d, %[^,], %d, %[^;];", &id, nome, &prioridade, ambiente)==4){
-        colocaFinalCli(p, id, nome, prioridade, ambiente);
+    while(fscanf(arqv, " %d, %[^,], %[^;];", &id, nome, ambiente)==3){
+        colocaFinalCli(p, id, nome, ambiente);
     }
 
     fclose(arqv);
@@ -153,6 +146,25 @@ void atualizaClientes(cliente *p){
     } else if(qtd>0){
         printf("Lista de clientes atualizada com sucesso!!!\n");
     }
+}
+
+void guardaClientes(cliente *clients){
+    FILE *arqv=NULL;
+    cliente *c=NULL;
+
+    arqv=fopen("arquivostxt/clientes.txt", "w");
+    if(arqv==NULL){
+        printf("Não foi possível abrir clientes.txt para salvar clientes\n");
+        return;
+    }
+
+    c=clients->prox;
+    while(c != NULL){
+        fprintf(arqv, "%d, %s, %s;\n", c->idCli, c->nomeCli, c->ambiente);
+        c=c->prox;
+    }
+
+    fclose(arqv);
 }
 
 void liberaCli(cliente **p){
