@@ -31,6 +31,14 @@ void statusCliente(cliente *p);
 
 void retirarCliente(cliente *p, int idCliente);
 
+void atualizaNomeCliente(cliente *p, int idCliente, char nome[max]);
+
+void atualizaIDCliente(cliente *p, int idCliente, int idTroca);
+
+void atualizaAmbiCliente(cliente *p, int idCliente, char nome[max]);
+
+void atualizaPrioCliente(cliente *p, int idCliente, int prioridade);
+
 void atualizaClientes(cliente *p);
 
 void liberaCli(cliente **p);

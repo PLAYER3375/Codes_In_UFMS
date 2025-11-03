@@ -92,6 +92,33 @@ void atualizaPlano(planoCorte *p, cliente *q){
     }
 }
 
+void statusCortes(planoCorte *p){
+    int qtd;
+    char cortado[6];
+    strcpy(cortado, "Não");
+    
+    qtd=qtdPla(p);
+
+    if(qtd>0){
+        printf("Os cortes disponíveis são:\n");
+        printf("|\n");
+        printf("V\n");
+        p=p->prox;
+        printf("  NOME DO CLIENTE  ||  AMBIENTE  ||  COR E ESPESSURA DA CHAPA  ||  CORTADA?\n");
+        while(p!=NULL){
+            if(p->cortado==1){
+                strcpy(cortado, "Sim");
+            } else {
+                strcpy(cortado, "Não");
+            }
+            printf("  %s  ||  %s  ||  %s %dmm  ||  %s\n", p->cliente->nomeCli, p->cliente->ambiente, p->corChapa, p->espessura, cortado);
+            p=p->prox;
+        }
+    } else {
+        printf("Nenhum corte disponível!!!\n");
+    }
+}
+
 void liberaPlano(planoCorte **p){
     if(*p!=NULL){
         liberaPlano(&(*p)->prox);
@@ -107,13 +134,13 @@ void menu()
     printf("1-STATUS DO ESTOQUE\n");
     printf("2-ADICIONAR AO ESTOQUE\n");
     printf("3-RETIRAR DO ESTOQUE\n");
-    printf("4-TROCAR MANUALMENTE A ORDEM DO ESTOQUE\n");
+    printf("4-TROCAR MANUALMENTE A ORDEM DO ESTOQUE\n\n");
 
     printf("OPÇÕES PARA CONTROLE DE CLIENTES:\n");
     printf("5-LISTA DE CLIENTES\n");
     printf("6-ADICIONAR CLIENTE À LISTA\n");
     printf("7-RETIRAR CLIENTE DA LISTA\n");
-    printf("8-ATUALIZAR INFORMAÇÕES DO CLIENTE NA LISTA\n");
+    printf("8-ATUALIZAR INFORMAÇÕES DO CLIENTE NA LISTA\n\n");
 
 
     printf("OPÇÕES PARA CONTROLE DE PLANO DE CORTE:\n");
@@ -121,7 +148,7 @@ void menu()
     printf("10-ADICIONAR AO PLANO DE CORTE\n");
     printf("11-RETIRAR DO PLANO DE CORTE\n");
     printf("12-TROCAR MANUALMENTE A ORDEM DE CORTE\n");
-    printf("13-SUGESTÃO DE ORDEM PARA CORTE\n");
+    printf("13-SUGESTÃO DE ORDEM PARA CORTE\n\n");
 
     printf("OPÇÕES PARA O REGISTRO DO DIA:\n");
     printf("14-INICIAR CORTES\n");
@@ -247,8 +274,15 @@ int main(void){
                 statusCliente(clientes);
                 qtd=qtdClientes(clientes);
                 if(qtd!=0){
-                    printf("Escolha o id do cliente que deseja atualizar as informações: ");
-                    scanf(" %d", &idCli);
+                    do{
+                      i=0;
+                      printf("Escolha o id do cliente que deseja atualizar as informações: ");
+                      scanf(" %d", &idCli);
+                      i=buscaClienteIDint(clientes, idCli);
+                      if(i==0){
+                        printf("Id inválido.");
+                      }
+                    }while(i==0);
                     do{
                         printf("OPÇÕES DE INFORMAÇÕES ATUALIZÁVEIS:\n");
                         printf("1-ID\n");
@@ -260,20 +294,27 @@ int main(void){
                     
                         switch(espessura){
                             case 1:
-                                printf("Digite o novo ID do cliente: ");
-                                scanf(" %d", &posicChapa);
+                                do{
+                                  printf("Digite o novo ID do cliente: ");
+                                  scanf(" %d", &posicChapa);
+                                  i=0;
+                                  i=buscaClienteIDint(clientes, posicChapa);
+                                  if(i==1){
+                                    printf("Outro cliente já utiliza este id.\n");
+                                  }
+                                }while(i==1);
                                 atualizaIDCliente(clientes, idCli, posicChapa);
                             break;
                             
                             case 2:
                                 printf("Digite o novo nome do cliente: ");
-                                scanf(" %[^\n]", &nome);
+                                scanf(" %[^\n]", nome);
                                 atualizaNomeCliente(clientes, idCli, nome);
                             break;
                             
                             case 3:
                                 printf("Digite novamente os ambientes do cliente: ");
-                                scanf(" %[^\n]", &nome);
+                                scanf(" %[^\n]", nome);
                                 atualizaAmbiCliente(clientes, idCli, nome);
                             break;
                             
@@ -284,12 +325,16 @@ int main(void){
                             break;
                         }
                         if(espessura<1 || espessura>4){
-                            printf("OPÇÃO INVÁLIDA. POR FAVOR ESCOLHA OUTRO\n");
+                            printf("Opção inválida. Escolha outra opção.\n");
                         }
                     }while(espessura<1 || espessura>4);
                 } else {
                     printf("Nenhum cliente para atualizar informações.\n");
                 }
+            break;
+            
+            case 9:
+                statusCortes(planoDia);
             break;
             
             case 0:
