@@ -111,7 +111,8 @@ void trocaPlano(planoCorte *p, int posicIni, int posicFim){
         printf("Posição da corte inválida\n");
         return;
     }
-    if(posicIni == posicFim) return;
+    if(posicIni==posicFim)
+        return;
 
     prev1 = p;
     for(i = 1; i < posicIni; i++) prev1 = prev1->prox;
@@ -193,10 +194,10 @@ void guardaNCortados(planoCorte *p){
     fclose(arqv);
 }
 
-void liberaPlano(planoCorte **p){
-    if(*p!=NULL){
-        liberaPlano(&(*p)->prox);
-        free(*p);
+void liberaPlano(planoCorte *p){
+    if(p!=NULL){
+        liberaPlano(p->prox);
+        free(p);
     }
 }
 

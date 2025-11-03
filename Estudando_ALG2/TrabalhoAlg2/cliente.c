@@ -167,9 +167,9 @@ void guardaClientes(cliente *clients){
     fclose(arqv);
 }
 
-void liberaCli(cliente **p){
-    if(*p!=NULL){
-        liberaCli(&(*p)->prox);
-        free(*p);
+void liberaCli(cliente *p){
+    if(p!=NULL){
+        liberaCli(p->prox);
+        free(p);
     }
 }
