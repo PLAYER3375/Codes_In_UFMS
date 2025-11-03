@@ -201,16 +201,15 @@ void liberaPlano(planoCorte **p){
 }
 
 int temChapaEmEstoque(stock *estoque, char cor[max], int espessura){
-    stock *s=NULL;
     int encontrado=0;
 
     if(estoque==NULL)
         return 0;
 
-    if(strcmp(s->corChapa, cor) == 0 && s->espessuraChapa == espessura){
+    if(strcmp(estoque->corChapa, cor)==0 && estoque->espessuraChapa==espessura){
         return 1;
     }
-    encontrado = temChapaEmEstoque(s, cor, espessura);
+    encontrado=temChapaEmEstoque(estoque->prox, cor, espessura);
     return encontrado;
 }
 
@@ -536,7 +535,7 @@ int main(void){
                 guardaEstoque(estoque);
                 guardaClientes(clientes);
                 guardaNCortados(planoDia);
-                geraRelatorio(planoDia, estoque);
+                gravaRelatorio(planoDia, estoque);
                 estoque=estoque->prox;
                 clientes=clientes->prox;
                 planoDia=planoDia->prox;
