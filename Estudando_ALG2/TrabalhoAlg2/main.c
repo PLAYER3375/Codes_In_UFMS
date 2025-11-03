@@ -336,6 +336,25 @@ int main(void){
             case 9:
                 statusCortes(planoDia);
             break;
+
+            case 10:
+                do{
+                    statusCliente(clientes);
+                    printf("Coloque o id do cliente que este corte irá pertencer: ");
+                    scanf(" %d", &idCli);
+                    i=0;
+                    i=buscaClienteIDint(clientes, idCli);
+                    if(i==0){
+                        printf("Id inválido.");
+                    }
+                }while(i==0);
+                printf("Qual a cor da chapa que este corte terá: ");
+                scanf(" %[^\n]", nome);
+                printf("Coloque espessura da chapa: ");
+                scanf(" %d", &espessura);
+                adicionaPlano(planoDia, idCli, nome, espessura);
+                reorganizaPlaPrioCliente(planoDia, clientes);
+            break;
             
             case 0:
                 guardaEstoque(estoque);
