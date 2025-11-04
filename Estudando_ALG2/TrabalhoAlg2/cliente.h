@@ -40,6 +40,6 @@ void atualizaAmbiCliente(cliente *p, int idCliente, char nome[max]);
 
 void atualizaClientes(cliente *p);
 
-void liberaCli(cliente **p);
+void liberaCli(cliente *p);
 
 #endif

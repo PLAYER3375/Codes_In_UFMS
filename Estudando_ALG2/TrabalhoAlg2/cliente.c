@@ -78,17 +78,16 @@ void statusCliente(cliente *p){
             p=p->prox;
         }
     } else {
-        printf("Nenhuma chapa disponível!!!\n");
+        printf("Nenhum cliente disponível!!!\n");
     }
 }
 
 void retirarCliente(cliente *p, int idCliente){
     cliente *aux=NULL;
-    
     while(p->prox!=NULL && p->prox->idCli!=idCliente){
         p=p->prox;
     }
-    if(p!=NULL){
+    if(p->prox!=NULL){
         aux=p->prox;
         p->prox=aux->prox;
         free(aux);

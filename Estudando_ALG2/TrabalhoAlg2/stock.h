@@ -35,4 +35,6 @@ void guardaEstoque(stock *p);
 
 void trocaEstoque(stock *p, int posicIni, int posicFim);
 
+int encontraPosEstoque(stock *estoque, const char *corChapa, int espessura);
+
 #endif

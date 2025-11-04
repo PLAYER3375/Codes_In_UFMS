@@ -129,11 +129,32 @@ void trocaPlano(planoCorte *p, int posicIni, int posicFim){
 }
 
 
-void retirarPlano(planoCorte *p, int idCliente){
-    planoCorte *aux=NULL;
-    while(p->prox!=NULL && p->prox->cliente->idCli!=idCliente){
+void retirarPlano(planoCorte *p, int posic) {
+    planoCorte *aux = NULL;
+    int qtd = 0, i;
+    qtd = qtdPla(p);
+    
+    if (posic < 1 || posic > qtd) {
+        printf("Plano não encontrado, operação ignorada.\n");
+        return;
+    }
+
+    if(posic==1){
+        aux=p->prox;
+        if(aux!=NULL){
+            p->prox=aux->prox;
+            free(aux);
+            printf("Plano de corte removido com sucesso!!!\n");
+        } else {
+            printf("Plano não encontrado, operação ignorada.\n");
+        }
+        return;
+    }
+
+    for (i=1; i<posic; i++) {
         p=p->prox;
     }
+
     if(p->prox!=NULL){
         aux=p->prox;
         p->prox=aux->prox;
@@ -147,7 +168,7 @@ void retirarPlano(planoCorte *p, int idCliente){
 
 
 void statusCortes(planoCorte *p){
-    int qtd;
+    int qtd, i=1;
     char cortado[6];
     strcpy(cortado, "Não");
     
@@ -158,15 +179,16 @@ void statusCortes(planoCorte *p){
         printf("|\n");
         printf("V\n");
         p=p->prox;
-        printf("  NOME DO CLIENTE  ||  AMBIENTE  ||  COR E ESPESSURA DA CHAPA  ||  CORTADA?\n");
+        printf(" ORDEM  ||  NOME DO CLIENTE  ||  AMBIENTE  ||  COR E ESPESSURA DA CHAPA  ||  CORTADA?\n");
         while(p!=NULL){
             if(p->cortado==1){
                 strcpy(cortado, "Sim");
             } else {
                 strcpy(cortado, "Não");
             }
-            printf("  %s  ||  %s  ||  %s %dmm  ||  %s\n", p->cliente->nomeCli, p->cliente->ambiente, p->corChapa, p->espessura, cortado);
+            printf(" %d  ||  %s  ||  %s  ||  %s %dmm  ||  %s\n", i, p->cliente->nomeCli, p->cliente->ambiente, p->corChapa, p->espessura, cortado);
             p=p->prox;
+            i++;
         }
     } else {
         printf("Nenhum corte disponível!!!\n");
@@ -472,7 +494,7 @@ int main(void){
                 statusCortes(planoDia);
                 qtd=qtdPla(planoDia);
                 if(qtd!=0){
-                    printf("Coloque o id do cliente do plano que deseja retirar: ");
+                    printf("Coloque a posiçao do plano que deseja retirar: ");
                     scanf(" %d", &idCli);
                     retirarPlano(planoDia, idCli);
                 } else {
@@ -498,16 +520,14 @@ int main(void){
                 if(planoDia->prox==NULL){
                     printf("Nenhum corte cadastrado!!!\n");
                 } else {
-                    /* declaração feita no topo da função main */
-                    percorrePlano = planoDia->prox;
+                    percorrePlano=planoDia->prox;
                     while(percorrePlano!=NULL){
                         printf("Corte atual: cliente %s - chapa %s %dmm\n", percorrePlano->cliente->nomeCli, percorrePlano->corChapa, percorrePlano->espessura);
                         printf("Deseja cortar esta chapa agora? (s/n): ");
                         scanf(" %c", &confirma);
                         if(confirma=='s'){
-                            /* verifica se chapa existe no estoque */
-                            posicChapa = encontraPosEstoque(estoque, percorrePlano->corChapa, percorrePlano->espessura);
-                            if(posicChapa > 0){
+                            posicChapa=encontraPosEstoque(estoque, percorrePlano->corChapa, percorrePlano->espessura);
+                            if(posicChapa>0){
                                 printf("Chapa encontrada em estoque na posição %d.\n", posicChapa);
                                 printf("Digite hora e minuto de INICIO (HH MM): ");
                                 scanf(" %d %d", &hIni, &mIni);
@@ -527,7 +547,7 @@ int main(void){
                         } else {
                             printf("Pulando este corte.\n");
                         }
-                        percorrePlano = percorrePlano->prox;
+                        percorrePlano=percorrePlano->prox;
                     }
                 }
             } break;

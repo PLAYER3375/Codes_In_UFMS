@@ -1,4 +1,3 @@
-Branco Cristal, 6;
 BRANCO TX, 15;
 Cinza Urban, 15;
 Branco Ártico, 15;

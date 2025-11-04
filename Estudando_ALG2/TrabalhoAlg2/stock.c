@@ -163,3 +163,16 @@ void trocaEstoque(stock *p, int posicIni, int posicFim){
         ant2->prox=atual;
     }
 }
+
+int encontraPosEstoque(stock *estoque, const char *corChapa, int espessura){
+    int pos=0;
+    estoque=estoque->prox;
+    while(estoque!=NULL){
+        if(strcmp(estoque->corChapa, corChapa)==0 && estoque->espessuraChapa==espessura){
+            return pos;
+        }
+        estoque=estoque->prox;
+        pos++;
+    }
+    return -1;
+}
