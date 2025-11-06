@@ -1,0 +1,16 @@
+*********************************
+PLANOS CORTADOS:
+*********************************
+
+*********************************
+PLANOS NÃO CORTADOS:
+Cliente: Jefferson | Ambiente: Banheiro social e quarto | Chapa: Nogueira Natural 15mm | Em estoque: Sim
+Cliente: João | Ambiente: Sala e quarto | Chapa: Tauari Arena 15mm | Em estoque: Sim
+Cliente: Tania | Ambiente: Closet | Chapa: Branco Trama 18mm | Em estoque: Sim
+Cliente: Jefferson | Ambiente: Banheiro social e quarto | Chapa: Nogal Soft 6mm | Em estoque: Sim
+Cliente: Carlos | Ambiente: Suite | Chapa: Rovere Italiana 18mm | Em estoque: Sim
+Cliente: Jefferson | Ambiente: Banheiro social e quarto | Chapa: Trancoso 18mm | Em estoque: Sim
+Cliente: Kleber | Ambiente: Cozinha | Chapa: Branco Cristal 6mm | Em estoque: Não
+Cliente: Jefferson | Ambiente: Banheiro social e quarto | Chapa: Chumbo Touch 18mm | Em estoque: Sim
+*********************************
+

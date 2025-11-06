@@ -307,12 +307,24 @@ void menu()
 }
 
 
-int main(void){
+int main(int argc, char *argv[]){
     int opcao=0, qtd=0, espessura, posicChapa=0, i, idCli=-1, hIni, mIni, hFim, mFim;
     char nome[max], ambiente[max], confirma;
     stock *estoque=NULL;
     cliente *clientes=NULL;
     planoCorte *planoDia=NULL, *percorrePlano=NULL;
+
+    if(argc>1 && (strcmp(argv[1], "--batch")==0)){
+        if(argc>2){
+            if(freopen(argv[2], "r", stdin)==NULL){
+                perror("Não foi possível abrir arquivo de batch");
+                return 1;
+            }
+        } else {
+            printf("Uso: %s --batch <arquivo_de_comandos>\n", argv[0]);
+            return 1;
+        }
+    }
     
     estoque=(stock *)malloc(sizeof(stock));
     clientes=(cliente *)malloc(sizeof(cliente));
