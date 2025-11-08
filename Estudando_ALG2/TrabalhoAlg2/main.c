@@ -1,3 +1,16 @@
+/************************************************************
+*                                                           *
+* Nome do(a) estudante:Matheus Henrique dos Santos Gomes    *
+* Trabalho Prático - CutPlanner                             *
+* Disciplinas: Algoritmos e Programação II                  *
+* Laboratório de Algoritmos e Programação II                *
+* Professores: Ivone e Ronaldo                              *
+* Data: 08/11/25                                            *
+* Versão: 1.9                                               *
+* Descrição: Arquivo main.c com todas as funcionalidades.   *
+*                                                           *
+*************************************************************/
+
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>

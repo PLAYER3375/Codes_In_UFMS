@@ -1,3 +1,16 @@
+/************************************************************
+*                                                           *
+* Nome do(a) estudante:Matheus Henrique dos Santos Gomes    *
+* Trabalho Prático - CutPlanner                             *
+* Disciplinas: Algoritmos e Programação II                  *
+* Laboratório de Algoritmos e Programação II                *
+* Professores: Ivone e Ronaldo                              *
+* Data: 08/11/25                                            *
+* Versão: 1.9                                               *
+* Descrição: Arquivo cabeçalho do arquivo stock.c           *
+*                                                           *
+*************************************************************/
+
 #ifndef STOCK_H
 
 #define STOCK_H
