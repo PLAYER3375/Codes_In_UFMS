@@ -286,7 +286,7 @@ void gravaRelatorio(planoCorte *planoCorte1, stock *estoque){
     }
     fprintf(arqv, "*********************************\n\n");
     fclose(arqv);
-    printf("Relatório do dia gerado: relatorioDia.txt\n");
+    printf("\nRelatório do dia gerado: relatorioDia.txt\n");
 }
 
 void menu()
