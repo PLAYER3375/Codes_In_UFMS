@@ -464,6 +464,7 @@ int main(int argc, char *argv[]){
                         printf("Escolha o id do cliente que deseja retirar: ");
                         scanf(" %d", &posicChapa);
                         i=0;
+                        confirma='s';
                         i=buscaIDnoPlano(planoDia->prox, posicChapa);
                         if(i==0){
                             retirarCliente(clientes, posicChapa);
@@ -475,7 +476,7 @@ int main(int argc, char *argv[]){
                                 i=0;
                             }
                         }
-                    }while(i>0);
+                    }while(i>0 && confirma=='s');
                 } else {
                     printf("Nenhum cliente para retirar.\n");
                 }
