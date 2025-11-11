@@ -252,7 +252,7 @@ int buscaIDnoPlano(planoCorte *p, int idCli){
         return 0;
     } else {
         i=buscaIDnoPlano(p->prox, idCli);
-        if(p->cliente->idCli==idCli){
+        if(p->cliente->idCli==idCli && p->cortado==0){
             return 1+i;
         } else {
             return i;
