@@ -139,7 +139,7 @@ void atualizaClientes(cliente *p){
     FILE *arqv=NULL;
     char nome[max], ambiente[max];
     int id, qtd;
-    arqv=fopen("arquivostxt/clientes.txt", "r");
+    arqv=fopen("bancotxt/clientes.txt", "r");
     if(arqv==NULL){
         printf("Não foi possível abrir o arquivo!\n");
         return;
@@ -164,7 +164,7 @@ void guardaClientes(cliente *clients){
     FILE *arqv=NULL;
     cliente *c=NULL;
 
-    arqv=fopen("arquivostxt/clientes.txt", "w");
+    arqv=fopen("bancotxt/clientes.txt", "w");
     if(arqv==NULL){
         printf("Não foi possível abrir clientes.txt para salvar clientes\n");
         return;

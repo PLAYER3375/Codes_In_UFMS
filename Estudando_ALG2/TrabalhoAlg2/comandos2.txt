@@ -1,0 +1,47 @@
+2
+2
+Preto
+15
+Amêndoa
+18
+6
+2
+1254
+João Silva
+Cozinha
+257
+Maria Clara
+Escritório
+8
+1254 
+2
+João da Silva
+5
+7
+1254
+10
+257
+Amêndoa
+18
+10
+257
+Louro Freijó
+15
+10
+257
+Preto
+18
+10
+257
+Preto
+15
+9
+11
+1
+13
+s
+n
+s
+11 30
+11 40
+0

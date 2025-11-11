@@ -1,0 +1,33 @@
+2
+3
+Cinza
+15
+Branco
+18
+Carvalho
+18
+6
+2
+1
+Ana Paula
+Quarto
+2
+Lucas
+Sala
+10
+1
+Branco
+18
+10
+2
+Cinza
+15
+9
+13
+s
+1 12
+1 22
+s
+1 23
+1 33
+0

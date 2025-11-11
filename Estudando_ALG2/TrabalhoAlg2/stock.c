@@ -69,7 +69,7 @@ void atualizaEstoque(stock *p){
     FILE *arqv=NULL;
     char nome[max];
     int espessura, qtd;
-    arqv=fopen("arquivostxt/estoque.txt", "r");
+    arqv=fopen("bancotxt/estoque.txt", "r");
     if(arqv==NULL){
         printf("Não foi possível abrir o arquivo!\n");
         return;
@@ -138,7 +138,7 @@ void liberaEstoque(stock *p){
 
 void guardaEstoque(stock *p){
     FILE *arqv=NULL;
-    arqv=fopen("arquivostxt/estoque.txt", "w");
+    arqv=fopen("bancotxt/estoque.txt", "w");
     if(arqv==NULL){
         printf("Não foi possível abrir o arquivo!!!");
         return;
@@ -178,7 +178,7 @@ void trocaEstoque(stock *p, int posicIni, int posicFim){
 }
 
 int encontraPosEstoque(stock *estoque, const char *corChapa, int espessura){
-    int pos=0;
+    int pos=1;
     estoque=estoque->prox;
     while(estoque!=NULL){
         if(strcmp(estoque->corChapa, corChapa)==0 && estoque->espessuraChapa==espessura){
