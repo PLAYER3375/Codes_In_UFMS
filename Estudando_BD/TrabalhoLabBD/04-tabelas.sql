@@ -17,7 +17,7 @@ CREATE TABLE cliente (
 
 CREATE TABLE modulo (
     id_modulo INTEGER PRIMARY KEY,
-    complexidade VARCHAR(50)
+    complexidade INTEGER DEFAULT 1 CHECK(complexidade>0 OR complexidade<6) --a complexidade será calculada contando o número de peças do módulo
 );
 
 CREATE TABLE funcionario (
@@ -51,6 +51,7 @@ CREATE TABLE projeto (
     finalizado BOOLEAN,
     ambientes VARCHAR(255),
     valorVenda DECIMAL(10, 2),
+    diaVendido DATE,
     garantiaMesVenda INTEGER,
     id_cli INTEGER NOT NULL,
     id_funcVendedor INTEGER NOT NULL,
@@ -68,14 +69,15 @@ CREATE TABLE estoqueChapa (
 CREATE TABLE corte (
     id_corte INTEGER PRIMARY KEY,
     cortado BOOLEAN,
-    inicio_corte TIMESTAMP WITHOUT TIME ZONE,
-    fim_corte TIMESTAMP WITHOUT TIME ZONE,
+    diaCortado DATE,
+    inicio_corte TIME WITHOUT TIME ZONE,
+    fim_corte TIME WITHOUT TIME ZONE,
     id_chapaUsar INTEGER NOT NULL,
     id_funcCortou INTEGER NOT NULL,
-	id_projOrigem INTEGER NOT NULL,
+    id_projOrigem INTEGER NOT NULL,
     FOREIGN KEY (id_chapaUsar) REFERENCES estoqueChapa(id_chapa),
     FOREIGN KEY (id_funcCortou) REFERENCES operador(id_funcOperador),
-	FOREIGN KEY (id_projOrigem) REFERENCES projeto(id_projeto)
+    FOREIGN KEY (id_projOrigem) REFERENCES projeto(id_projeto)
 );
 
 CREATE TABLE peca (
@@ -92,6 +94,7 @@ CREATE TABLE peca (
 CREATE TABLE montaModulo (
     id_modulo INTEGER,
     id_montador INTEGER,
+    diaMontado DATE,
     PRIMARY KEY (id_modulo, id_montador),
     FOREIGN KEY (id_modulo) REFERENCES modulo(id_modulo),
     FOREIGN KEY (id_montador) REFERENCES montador(id_funcMontador)
