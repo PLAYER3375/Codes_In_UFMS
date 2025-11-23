@@ -17,7 +17,7 @@ CREATE TABLE cliente (
 
 CREATE TABLE modulo (
     id_modulo INTEGER PRIMARY KEY,
-    complexidade INTEGER DEFAULT 1 CHECK(complexidade>0 OR complexidade<6) --a complexidade será calculada contando o número de peças do módulo
+    complexidade INTEGER DEFAULT 1 CHECK(complexidade>0 AND complexidade<6) --a complexidade será calculada contando o número de peças do módulo
 );
 
 CREATE TABLE funcionario (
