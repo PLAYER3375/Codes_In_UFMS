@@ -48,7 +48,7 @@ CREATE TABLE vendedor (
 
 CREATE TABLE projeto (
     id_projeto INTEGER PRIMARY KEY,
-    finalizado BOOLEAN,
+    finalizado BOOLEAN DEFAULT FALSE,
     ambientes VARCHAR(255),
     valorVenda DECIMAL(10, 2),
     diaVendido DATE,
@@ -73,7 +73,7 @@ CREATE TABLE corte (
     inicio_corte TIME WITHOUT TIME ZONE,
     fim_corte TIME WITHOUT TIME ZONE,
     id_chapaUsar INTEGER NOT NULL,
-    id_funcCortou INTEGER NOT NULL,
+    id_funcCortou INTEGER,
     id_projOrigem INTEGER NOT NULL,
     FOREIGN KEY (id_chapaUsar) REFERENCES estoqueChapa(id_chapa),
     FOREIGN KEY (id_funcCortou) REFERENCES operador(id_funcOperador),

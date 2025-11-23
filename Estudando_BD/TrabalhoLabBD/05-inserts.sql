@@ -163,11 +163,11 @@ INSERT INTO corte (id_corte, cortado, diaCortado, inicio_corte, fim_corte, id_ch
 (21, TRUE, '2024-01-23', '13:00:00', '14:30:00', 12, 8, 2),
 (22, TRUE, '2024-01-24', '08:30:00', '10:00:00', 14, 10, 2),
 (23, TRUE, '2024-01-24', '10:30:00', '12:00:00', 16, 10, 2),
-(24, FALSE, NULL, NULL, NULL, 18, 12, 3),
-(25, FALSE, NULL, NULL, NULL, 20, 12, 3),
-(26, FALSE, NULL, NULL, NULL, 22, 14, 3),
-(27, FALSE, NULL, NULL, NULL, 24, 14, 3),
-(28, FALSE, NULL, NULL, NULL, 26, 16, 3),
+(24, FALSE, NULL, NULL, NULL, 18, NULL, 3),
+(25, FALSE, NULL, NULL, NULL, 20, NULL, 3),
+(26, FALSE, NULL, NULL, NULL, 22, NULL, 3),
+(27, FALSE, NULL, NULL, NULL, 24, NULL, 3),
+(28, FALSE, NULL, NULL, NULL, 26, NULL, 3),
 (29, TRUE, '2024-01-26', '08:00:00', '10:00:00', 1, 16, 4),
 (30, TRUE, '2024-01-26', '10:30:00', '12:30:00', 3, 18, 4),
 (31, TRUE, '2024-01-26', '13:30:00', '15:30:00', 5, 18, 4),
@@ -338,8 +338,8 @@ INSERT INTO corte (id_corte, cortado, diaCortado, inicio_corte, fim_corte, id_ch
 (196, TRUE, '2024-06-02', '08:00:00', '09:30:00', 32, 25, 24),
 (197, TRUE, '2024-06-02', '10:00:00', '11:30:00', 34, 25, 24),
 (198, TRUE, '2024-06-03', '08:00:00', '10:00:00', 36, 27, 25),
-(199, FALSE, NULL, NULL, NULL, 38, 27, 40),
-(200, FALSE, NULL, NULL, NULL, 40, 8, 40);
+(199, FALSE, NULL, NULL, NULL, 38, NULL, 40),
+(200, FALSE, NULL, NULL, NULL, 40, NULL, 40);
 
 --peças dos módulos
 INSERT INTO peca (id_peca, altura, espessura, largura, id_corteOrigem, id_moduloDestino) VALUES
