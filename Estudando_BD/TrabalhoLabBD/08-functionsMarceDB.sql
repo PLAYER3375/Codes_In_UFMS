@@ -37,7 +37,7 @@ BEGIN
 
     RETURN;
 END;
-$$ LANGUAGE plpgsql;
+$$ LANGUAGE 'plpgsql';
 
 --usar:
 --SELECT * FROM ordem_compra() AS (

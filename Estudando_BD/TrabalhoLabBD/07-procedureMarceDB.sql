@@ -19,7 +19,7 @@ DECLARE
     bonus_montador DECIMAL(10,2);
     reg RECORD;
 BEGIN
-    --bônus de vendedores em 0.5% das vendas
+    --bônus de vendedores em 1% das vendas
     FOR reg IN 
         SELECT v.id_funcVendedor, COALESCE(SUM(p.valorVenda), 0) as total_mes
         FROM vendedor as v
@@ -28,14 +28,14 @@ BEGIN
             AND EXTRACT(YEAR FROM p.diaVendido)=p_ano
         GROUP BY v.id_funcVendedor
     LOOP
-        bonus_vendedor:=reg.total_mes*0.005;
+        bonus_vendedor:=reg.total_mes*0.01;
         UPDATE funcionario 
         SET bonus=bonus_vendedor
         WHERE id_func=reg.id_funcVendedor;
         RAISE NOTICE 'Vendedor %: bônus de R$ % calculado sobre vendas de R$ % no mês % do ano %', reg.id_funcVendedor, bonus_vendedor, reg.total_mes, p_mes, p_ano;
     END LOOP;
     
-    --bônus para operadores por corte de R$0,50
+    --bônus para operadores por corte de R$5,00
     FOR reg IN 
         SELECT o.id_funcOperador, COUNT(c.id_corte) as cortes_mes
         FROM operador as o
@@ -45,7 +45,7 @@ BEGIN
             AND c.cortado=TRUE
         GROUP BY o.id_funcOperador
     LOOP
-        bonus_operador:=reg.cortes_mes*0.50;
+        bonus_operador:=reg.cortes_mes*5.00;
         UPDATE funcionario 
         SET bonus=bonus_operador
         WHERE id_func=reg.id_funcOperador;
@@ -83,6 +83,7 @@ BEGIN
     RAISE NOTICE 'Cálculo de bônus para %/% concluído!', p_mes, p_ano;
 END;
 $$ LANGUAGE 'plpgsql';
+-- Usar: CALL calcular_bonus_mensal(1, 2024)
 
 -- 2 - Finalizar projeto e todos os seus cortes
 CREATE OR REPLACE PROCEDURE finalizar_projeto(p_id_projeto INTEGER) AS $$

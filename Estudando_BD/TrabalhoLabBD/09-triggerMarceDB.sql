@@ -87,3 +87,41 @@ CREATE TRIGGER trig_atualizar_estoque
     AFTER UPDATE ON corte
     FOR EACH ROW
     EXECUTE FUNCTION atualizar_estoque_apos_corte();
+
+-- 4 - Coloca o projeto como finalizado ao fim de todos os cortes.
+CREATE OR REPLACE FUNCTION verificar_finalizacao_projeto()
+RETURNS TRIGGER AS $$
+DECLARE
+    total_cortes_projeto INTEGER;
+    cortes_concluidos INTEGER;
+    projeto_finalizado BOOLEAN;
+BEGIN
+    SELECT COUNT(*)
+    INTO total_cortes_projeto
+    FROM corte
+    WHERE id_projOrigem = NEW.id_projOrigem;
+    
+    SELECT COUNT(*)
+    INTO cortes_concluidos
+    FROM corte
+    WHERE id_projOrigem = NEW.id_projOrigem
+    AND cortado = TRUE;
+    
+    projeto_finalizado:=(total_cortes_projeto=cortes_concluidos);
+    
+    UPDATE projeto 
+    SET finalizado=projeto_finalizado
+    WHERE id_projeto=NEW.id_projOrigem;
+    
+    IF projeto_finalizado THEN
+        RAISE NOTICE 'Projeto % FINALIZADO!', NEW.id_projOrigem;
+    END IF;
+    
+    RETURN NEW;
+END;
+$$ LANGUAGE 'plpgsql';
+
+CREATE TRIGGER trig_verificar_finalizacao_projeto
+    AFTER UPDATE OF cortado ON corte
+    FOR EACH ROW
+    EXECUTE FUNCTION verificar_finalizacao_projeto();
