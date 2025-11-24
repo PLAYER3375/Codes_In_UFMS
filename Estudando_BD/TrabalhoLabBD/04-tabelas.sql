@@ -22,7 +22,7 @@ CREATE TABLE modulo (
 
 CREATE TABLE funcionario (
     id_func INTEGER PRIMARY KEY,
-	nomeFunc VARCHAR(255) NOT NULL,
+    nomeFunc VARCHAR(255) NOT NULL,
     salario DECIMAL(10, 2) NOT NULL,
     bonus DECIMAL(10, 2) DEFAULT 0,
     id_funcGerente INTEGER,
