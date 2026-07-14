@@ -5,6 +5,7 @@
         <meta name="viewport"
         content="width=device-width,
         initial-scale=1.0">
+        <link rel="shortcut icon" href="logo.ico" type="image/x-icon">
         <title>Formulário de Teste</title>
     </head>
     <body>
@@ -20,11 +21,59 @@
                 <div>
                     <label for="numIdade">Idade:</label> <input type="number" name="nIdade" id="numIdade" min="1" max="120">
                 </div>
-                <div>Data de Nascimento:</div>
-                <div>Sexo: Masculino Feminino</div>
-                <div>Estado:</div>
-                <div>Cidade:</div>
-                <div>Fale sobre você:</div>
+                <div>
+                    <label for="dateNasc">Data de Nascimento:</label> <input type="date" name="dNasc" id="dateNasc">
+                </div>
+                <div>
+                    Sexo:
+                    <input type="radio" name="sexo" id="opM">
+                    <label for="opM">Masculino</label>
+                    
+                    <input type="radio" name="sexo" id="opF">
+                    <label for="opF">Feminino</label>
+                </div>
+                <div>
+                    <label for="estado">Digite ou selecione o Estado:</label>
+                    <input list="estados-brasil" id="estado" name="estado" placeholder="Ex: Paraná">
+                    <datalist id="estados-brasil">
+                        <option value="Acre (AC)">
+                        <option value="Alagoas (AL)">
+                        <option value="Amapá (AP)">
+                        <option value="Amazonas (AM)">
+                        <option value="Bahia (BA)">
+                        <option value="Ceará (CE)">
+                        <option value="Distrito Federal (DF)">
+                        <option value="Espírito Santo (ES)">
+                        <option value="Goiás (GO)">
+                        <option value="Maranhão (MA)">
+                        <option value="Mato Grosso (MT)">
+                        <option value="Mato Grosso do Sul (MS)">
+                        <option value="Minas Gerais (MG)">
+                        <option value="Pará (PA)">
+                        <option value="Paraíba (PB)">
+                        <option value="Paraná (PR)">
+                        <option value="Pernambuco (PE)">
+                        <option value="Piauí (PI)">
+                        <option value="Rio de Janeiro (RJ)">
+                        <option value="Rio Grande do Norte (RN)">
+                        <option value="Rio Grande do Sul (RS)">
+                        <option value="Rondônia (RO)">
+                        <option value="Roraima (RR)">
+                        <option value="Santa Catarina (SC)">
+                        <option value="São Paulo (SP)">
+                        <option value="Sergipe (SE)">
+                        <option value="Tocantins (TO)">
+                    </datalist>
+                </div>
+                <!--vou precisar criar um jeito depois pra isso aqui pelo JS, por enquanto a pessoa vai escrever a cidade-->
+                <div>
+                    <label for="txtCidade">Cidade:</label>
+                    <input type="text" name="txtCity" id="txtCidade" size="40" maxlength="50" placeholder="Ex: Andradina">
+                </div>
+                <div>
+                    <label for="txtSobre">Fale sobre você:</label>
+                    <input type="text" name="textoSobre" id="txtSobre" size="90" maxlength="500">
+                </div>
                 <div>Cor da camiseta:</div>
                 <div>Nível de conhecimento de inglês: baixo alto</div>
                 <div>Quero receber emails com notícias</div>
