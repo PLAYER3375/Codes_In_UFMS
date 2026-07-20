@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt=br">
+<html lang="pt-br">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport"
@@ -9,7 +9,11 @@
         <title>Formulário de Teste</title>
     </head>
     <body>
-        <form>
+        <!--o action não funciona pois o método post envia os dados para o index.html mas o index.html não tem como utilizar desses dados, por isso o erro 405, solução: integrar banco de dados ou armazenar localmente os dados usando js-->
+        <form
+            action="index.html" 
+            method="post">
+
             <fieldset id="Cadastro de Pessoa">
                 <legend>Cadastro de Pessoa</legend>
                 <div>
@@ -19,7 +23,7 @@
                     <label for="txtEmail">eMail:</label> <input type="email" name="nEmail" id="txtEmail" size="20" placeholder="Digite seu email">
                 </div>
                 <div>
-                    <label for="numIdade">Idade:</label> <input type="number" name="nIdade" id="numIdade" min="1" max="120">
+                    <label for="numIdade">Idade:</label> <input type="number" name="nIdade" id="numIdade" min="18" max="120">
                 </div>
                 <div>
                     <label for="dateNasc">Data de Nascimento:</label> <input type="date" name="dNasc" id="dateNasc">
@@ -74,9 +78,21 @@
                     <label for="txtSobre">Fale sobre você:</label>
                     <input type="text" name="textoSobre" id="txtSobre" size="90" maxlength="500">
                 </div>
-                <div>Cor da camiseta:</div>
-                <div>Nível de conhecimento de inglês: baixo alto</div>
-                <div>Quero receber emails com notícias</div>
+                <div>
+                    <label for="colorSuit">Cor da camiseta:</label>
+                    <input type="color" name="corCamisa" id="colorSuit" value="#0000FF">
+                </div>
+                <div>
+                    <label for="nivelIngles">Nível de conhecimento de inglês:</label> 
+                    baixo <input type="range" min="0" max="10" step="2" id="nivelIngles"> alto
+                </div>
+                <div>
+                    <input type="checkbox" name="chkNoticias" id="chkNoticias" checked>Quero receber emails com notícias
+                </div>
+                <div>
+                    <input type="reset">
+                    <input type="submit">
+                </div>
             </fieldset>
         </form>
     </body>
