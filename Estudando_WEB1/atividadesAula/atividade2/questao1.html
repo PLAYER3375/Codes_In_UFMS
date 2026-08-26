@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+        content="width=device-width,
+        initial-scale=1.0">
+        <meta name="author" content="Matheus Henrique dos Santos Gomes">
+        <meta name="date" content="2026-08-25" scheme="YYYY-MM-DD">
+    </head>
+    <body>
+        <h1>Formulário de Cadastro</h1>
+        <form>
+            <fieldset>
+                <legend>Dados Pessoais</legend>
+
+                <label for="txtNome">Nome:</label>
+                <input id="txtNome" name="nNome" type="text" max="99"><br>
+
+                <label for="dataNasc">Data de Nascimento:</label>
+                <input id="dataNasc" name="dtNasc" type="date"> <br>
+
+                <div>
+                    Sexo:
+                    <input type="radio" name="nSexo" id="radioMasc" value="M">
+                    <label for="radioMasc">Masculino</label>
+
+                    <input type="radio" name="nSexo" id="radioFem" value="F">
+                    <label for="radioFem">Feminino</label>
+                </div>
+
+                <div>
+                    Situação Civil:
+                    <input type="radio" name="nCivil" id="radioSolteiro" value="Solteiro">
+                    <label for="radioSolteiro">Solteiro(a)</label>
+
+                    <input type="radio" name="nCivil" id="radioCasado" value="Casado">
+                    <label for="radioCasado">Casado(a)</label>
+
+                    <input type="radio" name="nCivil" id="radioDivorciado" value="Divorciado">
+                    <label for="radioDivorciado">Divorciado(a)</label>
+
+                    <input type="radio" name="nCivil" id="radioViuvo" value="Viuvo">
+                    <label for="radioViuvo">Viúvo(a)</label>
+
+                    <input type="radio" name="nCivil" id="radioOutra" value="Outra">
+                    <label for="radioOutra">Outra</label>
+                </div>
+
+                <label for="txtCpf">CPF:</label>
+                <input type="text" id="txtCpf" name="tCpf" maxlength="14" placeholder="000.000.000-00" size="7"> <br>
+
+                <label for="txtRg">RG:</label>
+                <input type="text" id="txtRg" name="tRg" maxlength="12" placeholder="00.000.000-0" size="9">
+            </fieldset>
+            <br>
+            <fieldset>
+                <legend>Dados de Endereço</legend>
+
+                <label for="txtEnd">Endereço:</label>
+                <input type="text" >
+            </fieldset>
+        </form>
+    </body>
+    
+</html>
