@@ -10,57 +10,162 @@
     </head>
     <body>
         <h1>Formulário de Cadastro</h1>
-        <form>
-            <fieldset>
-                <legend>Dados Pessoais</legend>
+        <form action="http://cafe.intermidiaicmc.usp.br:22080/humberto/formulario.php" method="post" enctype="multipart/form-data">
+            <div>
+                <fieldset>
+                    <legend>Dados Pessoais</legend>
 
-                <label for="txtNome">Nome:</label>
-                <input id="txtNome" name="nNome" type="text" max="99"><br>
+                    <div>
+                        <label for="txtNome">Nome:</label>
+                        <input id="txtNome" name="nNome" type="text" max="99">
+                    </div>
 
-                <label for="dataNasc">Data de Nascimento:</label>
-                <input id="dataNasc" name="dtNasc" type="date"> <br>
+                    <div>
+                        <label for="dataNasc">Data de Nascimento:</label>
+                        <input id="dataNasc" name="dtNasc" type="date">
+                    </div>
 
-                <div>
-                    Sexo:
-                    <input type="radio" name="nSexo" id="radioMasc" value="M">
-                    <label for="radioMasc">Masculino</label>
+                    <div>
+                        Sexo:
+                        <input type="radio" name="nSexo" id="radioMasc" value="M">
+                        <label for="radioMasc">Masculino</label>
 
-                    <input type="radio" name="nSexo" id="radioFem" value="F">
-                    <label for="radioFem">Feminino</label>
-                </div>
+                        <input type="radio" name="nSexo" id="radioFem" value="F">
+                        <label for="radioFem">Feminino</label>
+                    </div>
 
-                <div>
-                    Situação Civil:
-                    <input type="radio" name="nCivil" id="radioSolteiro" value="Solteiro">
-                    <label for="radioSolteiro">Solteiro(a)</label>
+                    <div>
+                        Situação Civil:
+                        <input type="radio" name="nCivil" id="radioSolteiro" value="Solteiro">
+                        <label for="radioSolteiro">Solteiro(a)</label>
 
-                    <input type="radio" name="nCivil" id="radioCasado" value="Casado">
-                    <label for="radioCasado">Casado(a)</label>
+                        <input type="radio" name="nCivil" id="radioCasado" value="Casado">
+                        <label for="radioCasado">Casado(a)</label>
 
-                    <input type="radio" name="nCivil" id="radioDivorciado" value="Divorciado">
-                    <label for="radioDivorciado">Divorciado(a)</label>
+                        <input type="radio" name="nCivil" id="radioDivorciado" value="Divorciado">
+                        <label for="radioDivorciado">Divorciado(a)</label>
 
-                    <input type="radio" name="nCivil" id="radioViuvo" value="Viuvo">
-                    <label for="radioViuvo">Viúvo(a)</label>
+                        <input type="radio" name="nCivil" id="radioViuvo" value="Viuvo">
+                        <label for="radioViuvo">Viúvo(a)</label>
 
-                    <input type="radio" name="nCivil" id="radioOutra" value="Outra">
-                    <label for="radioOutra">Outra</label>
-                </div>
+                        <input type="radio" name="nCivil" id="radioOutra" value="Outra">
+                        <label for="radioOutra">Outra</label>
+                    </div>
 
-                <label for="txtCpf">CPF:</label>
-                <input type="text" id="txtCpf" name="tCpf" maxlength="14" placeholder="000.000.000-00" size="7"> <br>
+                    <div>
+                        <label for="txtCpf">CPF:</label>
+                        <input type="text" id="txtCpf" name="tCpf" maxlength="14" placeholder="000.000.000-00" size="7">
+                    </div>
 
-                <label for="txtRg">RG:</label>
-                <input type="text" id="txtRg" name="tRg" maxlength="12" placeholder="00.000.000-0" size="9">
-            </fieldset>
+                    <div>
+                        <label for="txtRg">RG:</label>
+                        <input type="text" id="txtRg" name="tRg" maxlength="12" placeholder="00.000.000-0" size="9">
+                    </div>
+                </fieldset>
+            </div>
             <br>
-            <fieldset>
-                <legend>Dados de Endereço</legend>
+            <div>
+                <fieldset>
+                    <legend>Dados de Endereço</legend>
+                    <div>
+                        <label for="txtEnd">Endereço:</label>
+                        <input type="text" id="txtEnd" name="tEnd">
+                    </div>
+                    <div>
+                        <label for="numEnd">Numero:</label>
+                        <input type="number" id="numEnd" max="9999" min="0" name="numEnd">
+                    </div>
 
-                <label for="txtEnd">Endereço:</label>
-                <input type="text" >
-            </fieldset>
+                    <div>
+                        <label for="compEnd">Complemento:</label>
+                        <input type="text" id="compEnd" name="compleEnd" maxlength="99">
+                    </div>
+
+                    <div>
+                        <label for="bairroEnd">Bairro:</label>
+                        <input type="text" id="bairroEnd" name="bairroEnd" maxlength="99">
+                    </div>
+
+                    <div>
+                        <label for="estado">Estado:</label>
+                        <input list="estados-brasil" id="estado" name="estado">
+                        <datalist id="estados-brasil">
+                            <option value="Acre (AC)">
+                            <option value="Alagoas (AL)">
+                            <option value="Amapá (AP)">
+                            <option value="Amazonas (AM)">
+                            <option value="Bahia (BA)">
+                            <option value="Ceará (CE)">
+                            <option value="Distrito Federal (DF)">
+                            <option value="Espírito Santo (ES)">
+                            <option value="Goiás (GO)">
+                            <option value="Maranhão (MA)">
+                            <option value="Mato Grosso (MT)">
+                            <option value="Mato Grosso do Sul (MS)">
+                            <option value="Minas Gerais (MG)">
+                            <option value="Pará (PA)">
+                            <option value="Paraíba (PB)">
+                            <option value="Paraná (PR)">
+                            <option value="Pernambuco (PE)">
+                            <option value="Piauí (PI)">
+                            <option value="Rio de Janeiro (RJ)">
+                            <option value="Rio Grande do Norte (RN)">
+                            <option value="Rio Grande do Sul (RS)">
+                            <option value="Rondônia (RO)">
+                            <option value="Roraima (RR)">
+                            <option value="Santa Catarina (SC)">
+                            <option value="São Paulo (SP)">
+                            <option value="Sergipe (SE)">
+                            <option value="Tocantins (TO)">
+                        </datalist>
+                    </div>
+
+                    <div>
+                        <label for="cidEnd">Cidade:</label>
+                        <input type="text" id="cidEnd" name="cidEnd" maxlength="99">
+                    </div>
+
+                    <div>
+                        <label for="txtCep">CEP:</label>
+                        <input type="text" id="txtCep" name="tCep" maxlength="10" placeholder="00.000-000" size="5">
+                    </div>
+                </fieldset>
+            </div>
+            <br>
+            <div>
+                <fieldset>
+                    <legend>Dados de login</legend>
+                    <div>
+                        <label for="txtMail">E-mail:</label>
+                        <input type="email" id="txtMail" name="tMail">
+                    </div>
+
+                    <div>
+                        <label for="imgPerfil">Imagem de perfil:</label>
+                        <input type="file" id="imgPerfil" name="imgPerfil">
+                    </div>
+
+                    <div>
+                        <label for="loginUser">Login de usuário:</label>
+                        <input type="text" id="loginUser" name="loginUser" maxlength="99">
+                    </div>
+
+                    <div>
+                        <label for="senhaUser">Senha:</label>
+                        <input type="password" id="senhaUser" name="senhaUser" maxlength="99">
+                    </div>
+
+                    <div>
+                        <label for="confSenhaUser">Confirme a senha:</label>
+                        <input type="password" id="confSenhaUser" name="confSenhaUser" maxlength="99">
+                    </div>
+                </fieldset>
+            </div>
+            <br>
+            <div>
+                <input type="submit" value="Enviar">
+                <input type="reset" value="Limpar">
+            </div>
         </form>
     </body>
-    
 </html>
