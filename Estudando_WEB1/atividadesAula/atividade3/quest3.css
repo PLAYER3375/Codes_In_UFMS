@@ -1,0 +1,31 @@
+#menu ul{
+    display: inline-flex;
+    list-style-type: none;
+    flex-direction: column;
+    justify-content: center;
+    width: 180px;
+} 
+
+#menu li{
+    margin: 1px;
+}
+
+#menu li a{
+    color: white;
+    display: flex;
+    text-decoration: none;
+    align-items: center;
+}
+
+#menu span{
+    display: flex;
+    background-color: #AAAAAA;
+    justify-content: center;
+    align-items: center;
+    width: 180px;
+    height: 50px;
+}
+
+#menu span:hover{
+    background-color: rgb(224, 27, 106);
+}

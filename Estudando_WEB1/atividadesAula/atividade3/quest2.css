@@ -1,0 +1,18 @@
+#menu ul {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+}
+
+#menu li a {
+    background-color: #AAAAAA;
+    color: #FFFFFF;
+    text-decoration: none;
+    margin: 1px;
+    padding: 5px;
+}
+
+#menu li a:hover{
+    color: #AAAAAA;
+    background-color: #3299CC;
+}
